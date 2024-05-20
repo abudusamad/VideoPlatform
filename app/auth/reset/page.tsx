@@ -1,4 +1,5 @@
 
+import { ResetForm } from "@/components/reset-form";
 import { Suspense } from "react";
 
 const AuthRest = () => {

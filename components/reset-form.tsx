@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { ResetPasswordSchema } from "@/schemas";
-
+import { resetPassword } from "@/actions/rest";
 
 export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -38,7 +38,7 @@ export const ResetForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      reset(values).then((data) => {
+      resetPassword(values).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });
