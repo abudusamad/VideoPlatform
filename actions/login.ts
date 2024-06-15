@@ -9,7 +9,7 @@ import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
 
 
-export const Login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (values: z.infer<typeof LoginSchema>) => {
 	const validatedFields = LoginSchema.safeParse(values);
 	
 	console.log("Login:", values);
@@ -21,23 +21,20 @@ export const Login = async (values: z.infer<typeof LoginSchema>) => {
     const { email, password} = validatedFields.data;
     const exitingUser = await getUserByEmail(email);
 
-    if (!exitingUser || !exitingUser.email || exitingUser.password !== password) {
+    if (!exitingUser || !exitingUser.email || !exitingUser.password ) {
         return {error: "Email does not exit!"}
     }
-    return {
-        success: "Logged in!"
-
-    }
-
+    
 	try {
 		await signIn("credentials", {
 			email,
 			password,
 		
 		});
+		return { success: "Logged in successfully!" };
 	} catch (error) {
 		if (error instanceof AuthError) {
-			switch (error) {
+			switch (error.type) {
 				case "CredentialsSignin":
 					return { error: "Invalid credentials" };
 				default:

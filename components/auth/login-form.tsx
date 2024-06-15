@@ -20,8 +20,10 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { LoginSchema } from "@/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { Login } from "@/actions/login";
+import { login } from "@/actions/login";
 import { toast } from "react-toastify";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -49,9 +51,16 @@ export const LoginForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      Login(values)
-        .then((values) => {
-          toast.success("succesfully Login");
+      login(values)
+        .then((data) => {
+          if (data?.error) {
+            form.reset();
+            setError(data.error);
+          }
+          if (data?.success) {
+            form.reset();
+            setSuccess(data.success);
+          }
         })
         .catch((error) => {
           toast.error("Something went wrong");
@@ -129,6 +138,8 @@ export const LoginForm = () => {
               )}
             />
           </div>
+          <FormError message={error} />
+          <FormSuccess message={success} />
 
           <Button disabled={isPending} type="submit" className="w-full">
             Login
