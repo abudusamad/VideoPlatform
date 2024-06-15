@@ -31,7 +31,6 @@ export const RegisterForm = () => {
       ? "Email already in use with different provider!"
       : "";
 
- 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -135,14 +134,7 @@ export const RegisterForm = () => {
                       </Button>
                     </div>
                   </FormControl>
-                  <Button
-                    size="sm"
-                    variant="link"
-                    asChild
-                    className="px-0 font-normal"
-                  >
-                    <Link href="/auth/reset">Forgot password?</Link>
-                  </Button>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -150,7 +142,7 @@ export const RegisterForm = () => {
           </div>
 
           <Button disabled={isPending} type="submit" className="w-full">
-            Login
+            Register an Account
           </Button>
         </form>
       </Form>

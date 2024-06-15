@@ -20,6 +20,8 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { LoginSchema } from "@/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { Login } from "@/actions/login";
+import { toast } from "react-toastify";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -46,7 +48,15 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-    console.log("Login form submitted with values: ", values);
+    startTransition(() => {
+      Login(values)
+        .then((values) => {
+          toast.success("succesfully Login");
+        })
+        .catch((error) => {
+          toast.error("Something went wrong");
+        });
+    });
   };
 
   return (
@@ -88,7 +98,7 @@ export const LoginForm = () => {
                       <Input
                         {...field}
                         disabled={isPending}
-                       placeholder="********"
+                        placeholder="********"
                         type={showPassword ? "text" : "password"}
                       />
                       <Button
