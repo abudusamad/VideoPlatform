@@ -20,6 +20,8 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { RegisterSchema } from "@/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { register } from "@/actions/register";
+
 
 export const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -47,7 +49,16 @@ export const RegisterForm = () => {
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
-    console.log("Login form submitted with values: ", values);
+
+    startTransition(() => {
+      register(values)
+        .then(() => {
+          setSuccess("Account created successfully!");
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    })
   };
 
   return (
