@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { RegisterSchema } from "@/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { register } from "@/actions/register";
-
+import { toast } from "react-toastify";
 
 export const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -31,7 +31,7 @@ export const RegisterForm = () => {
       ? "Email already in use with different provider!"
       : "";
 
-  const [showTwoFactor, setShowTwoFactor] = useState(false);
+ 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -40,7 +40,7 @@ export const RegisterForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      name:"",
+      name: "",
       email: "",
       password: "",
     },
@@ -53,12 +53,12 @@ export const RegisterForm = () => {
     startTransition(() => {
       register(values)
         .then(() => {
-          setSuccess("Account created successfully!");
+          toast.success("Acccount Created successfully");
         })
         .catch((error) => {
-          setError(error.message);
+          toast.error("failed to create account");
         });
-    })
+    });
   };
 
   return (
