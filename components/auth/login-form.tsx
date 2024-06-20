@@ -19,6 +19,7 @@ import {
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { LoginSchema } from "@/schemas";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -32,6 +33,7 @@ export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -44,6 +46,7 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
+    console.log("Login form submitted with values: ", values);
   };
 
   return (
@@ -81,12 +84,27 @@ export const LoginForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                       placeholder="********"
+                        type={showPassword ? "text" : "password"}
+                      />
+                      <Button
+                        className="absolute inset-y-0 right-2 flex items-center"
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => setShowPassword(!showPassword)}
+                        type="button"
+                      >
+                        {showPassword ? (
+                          <EyeOffIcon className="w-5 h-5" />
+                        ) : (
+                          <EyeIcon className="w-5 h-5" />
+                        )}
+                      </Button>
+                    </div>
                   </FormControl>
                   <Button
                     size="sm"
@@ -103,7 +121,7 @@ export const LoginForm = () => {
           </div>
 
           <Button disabled={isPending} type="submit" className="w-full">
-            {showTwoFactor ? "Confirm" : "Login"}
+            Login
           </Button>
         </form>
       </Form>
