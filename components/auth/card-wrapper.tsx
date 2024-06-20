@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Header } from "./header";
+import { Social } from "./social";
 
 
 interface CardWrapperProps {
@@ -22,17 +23,14 @@ export const CardWrapper = ({
     return (
         <Card className="w-[400px] shadow-md">
             <CardHeader>
-                <Header/>
+                <Header label={headerLabel} />
             </CardHeader>
             <CardContent>
                 {children}
             </CardContent>
             {showSocial && (
                 <CardFooter>
-                    <div className="flex space-x-4">
-                        <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Facebook</button>
-                        <button className="bg-red-500 text-white px-4 py-2 rounded-md">Google</button>
-                    </div>
+                   <Social/>
                 </CardFooter>
             )}
             <CardFooter>
