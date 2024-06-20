@@ -1,12 +1,14 @@
 "use client";
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Header } from "./header";
 
 
 interface CardWrapperProps {
     children: React.ReactNode;
     headerLabel: string
     backButtonLabel: string
+    backButtonHref: string
     showSocial?: boolean
 }
 
@@ -14,13 +16,13 @@ export const CardWrapper = ({
     children,
     headerLabel,
     backButtonLabel,
-    showSocial 
+    showSocial,
+    backButtonHref
 }:CardWrapperProps) => {
     return (
         <Card className="w-[400px] shadow-md">
             <CardHeader>
-                <h1 className="text-2xl font-semibold">{headerLabel}</h1>
-                <button className="text-blue-500">{backButtonLabel}</button>
+                <Header/>
             </CardHeader>
             <CardContent>
                 {children}
