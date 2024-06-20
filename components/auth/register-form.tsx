@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
+
 
 import { Input } from "@/components/ui/input";
 import {
@@ -21,7 +21,8 @@ import { Button } from "@/components/ui/button";
 import { RegisterSchema } from "@/schemas";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { register } from "@/actions/register";
-import { toast } from "react-toastify";
+import { FormError } from "../form-error";
+import { FormSuccess } from "../form-success";
 
 export const RegisterForm = () => {
   const searchParams = useSearchParams();
@@ -51,12 +52,11 @@ export const RegisterForm = () => {
 
     startTransition(() => {
       register(values)
-        .then(() => {
-          toast.success("Acccount Created successfully");
+        .then((data) => {
+          setError(data?.error);
+          setSuccess(data?.success);
+
         })
-        .catch((error) => {
-          toast.error("failed to create account");
-        });
     });
   };
 
@@ -140,6 +140,8 @@ export const RegisterForm = () => {
               )}
             />
           </div>
+          <FormError message={error || urlError} />
+          <FormSuccess message={success} />
 
           <Button disabled={isPending} type="submit" className="w-full">
             Register an Account
