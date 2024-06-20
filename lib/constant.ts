@@ -13,3 +13,9 @@ export const SHORT_DATE = 'Jan 1 - 9:00am PST';
 export const FULL_DATE = 'Jan 1st 9am Pacific Time (GMT-7)';
 export const TWEET_TEXT = META_DESCRIPTION;
 export const COOKIE = 'user-id';
+
+
+export const siteConfig = {
+    name: "VideoPlatform",
+    description: "This application is for streaming and uploading videos"
+}
