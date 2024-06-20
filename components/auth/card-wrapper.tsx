@@ -34,7 +34,8 @@ export const CardWrapper = ({
                 </CardFooter>
             )}
             <CardFooter>
-                <p className="text-center text-gray-500 text-sm">Don't have an account? <a href="#" className="text-blue-500">Sign up</a></p>
+              
+                <BackButon/>
             </CardFooter>
 
         </Card>
