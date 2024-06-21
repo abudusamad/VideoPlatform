@@ -6,7 +6,7 @@ import { UserRole } from "@prisma/client";
 import NextAuth from "next-auth";
 
 export const {
-	handlers: { GET, POST },
+	handlers,
 	auth,
 	signIn,
 	signOut,
