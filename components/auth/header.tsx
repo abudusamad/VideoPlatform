@@ -16,12 +16,12 @@ export const Header = ({ label }: HeaderProps) => {
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
       <div
         className={cn(
-          "flex items-center text-2xl font-medium gap-x-2",
+          "flex items-center text-2xl font-normal text-gray-500 gap-x-2",
           font.className
         )}
       >
         <Image src="/logo.svg" width={50} height={50} alt="logo" />
-        Videos
+        BrandVid
       </div>
 
       <p className="text-muted-foreground text-sm">{label}</p>

@@ -16,6 +16,6 @@ export const COOKIE = 'user-id';
 
 
 export const siteConfig = {
-    name: "VideoPlatform",
+    name: "BrandVid",
     description: "This application is for streaming and uploading videos"
 }
