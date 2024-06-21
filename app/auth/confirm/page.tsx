@@ -1,5 +1,5 @@
 
-import { ConfirmForm } from "@/components/confirm-form";
+import { ConfirmForm } from "@/components/auth/confirm-form";
 import { Suspense } from "react";
 
 const ConfirmPage = () => {

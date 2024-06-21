@@ -143,7 +143,7 @@ export const RegisterForm = () => {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
 
-          <Button disabled={isPending} type="submit" className="w-full">
+          <Button variant="blue" disabled={isPending} type="submit" className="w-full">
             Register an Account
           </Button>
         </form>
