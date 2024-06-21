@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { ResetPasswordSchema } from "@/schemas";
-import { resetPassword } from "@/actions/rest";
+import { resetPassword } from "@/actions/reset-password";
 
 export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>("");
