@@ -10,7 +10,7 @@ import { getUserByEmail } from "@/data/user";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?:string | null) => {
 	const validatedFields = LoginSchema.safeParse(values);
 	
 	console.log("Login:", values);
