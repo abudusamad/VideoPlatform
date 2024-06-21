@@ -2,9 +2,9 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 import { NewPasswordSchema } from "@/schemas";
-import { getResetPasswordTokenByToken } from "@/data/password-reset-token";
 import { getUserByEmail } from "@/data/user";
 import { db } from "@/lib/db";
+import { getPasswordResetTokenByToken } from "@/data/password-reset-token";
 
 
 export const newPassword = async (values: z.infer<typeof NewPasswordSchema>, token?: string | null) => {
@@ -19,7 +19,7 @@ export const newPassword = async (values: z.infer<typeof NewPasswordSchema>, tok
 
     const { password } = validatedFields.data;
 
-    const exiitingToken = await getResetPasswordTokenByToken(token);
+    const exiitingToken = await getPasswordResetTokenByToken(token);
     if (!exiitingToken) {
         return {error: "Token does not exist!"}
     }
