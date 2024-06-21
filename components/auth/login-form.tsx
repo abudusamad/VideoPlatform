@@ -62,8 +62,8 @@ export const LoginForm = () => {
             setSuccess(data.success);
           }
         })
-        .catch((error) => {
-          toast.error("Something went wrong");
+        .catch(() => {
+          setError("Something went wrong!");
         });
     });
   };

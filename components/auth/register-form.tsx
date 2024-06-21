@@ -6,7 +6,6 @@ import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
 import { Input } from "@/components/ui/input";
 import {
   Form,
@@ -50,14 +49,15 @@ export const RegisterForm = () => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {
-      register(values)
-        .then((data) => {
-          setError(data?.error);
-          setSuccess(data?.success);
-
-        })
-    });
+   startTransition(() => {
+     register(values).then((data) => {
+       if (!(data instanceof z.ZodError)) {
+         setError(data.error);
+         setSuccess(data.success);
+         form.reset();
+       }
+     });
+   });
   };
 
   return (
