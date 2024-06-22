@@ -6,20 +6,16 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { signOut, useSession } from "next-auth/react";
-import { AvatarImg } from "./avatarImg";
 import { MenuIcon } from "lucide-react";
+import { AvatarImg } from "./avatarImage";
 
 export const UserMenu = () => {
-
-
   const { data: session } = useSession();
 
   return (
     <div className="relative">
-     
-
-        <div
-          className="
+      <div
+        className="
           p-2
        md:py-1
         md:px-4
@@ -34,29 +30,26 @@ export const UserMenu = () => {
         items-center
 
         "
-        >
-          <Popover>
-            <PopoverTrigger asChild>
-              <div className="cursor-pointer flex items-center gap-3 ">
-                <MenuIcon size={24} />
-                <AvatarImg src={session?.user?.image} alt="user" />
-              </div>
-            </PopoverTrigger>
-            <PopoverContent>
-             
-               
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => signOut()}
-                  className="w-full text-center"
-                >
-                  Logout
-                </Button>
-            
-            </PopoverContent>
-          </Popover>
-       </div>
+      >
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className="cursor-pointer flex items-center gap-3 ">
+              <MenuIcon size={24} />
+              <AvatarImg src={session?.user?.image} alt="user" />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => signOut()}
+              className="w-full text-center"
+            >
+              Logout
+            </Button>
+          </PopoverContent>
+        </Popover>
+      </div>
     </div>
   );
 };
