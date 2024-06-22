@@ -35,3 +35,12 @@ export const NewPasswordSchema = z.object({
     message: "Password must be at least 6 characters",
     }),
 });
+
+export const CreateVideoSchema  = z.object({
+  title: z.string().min(1, {
+    message: "Title is required",
+  }),
+    description: z.string().min(3, {
+      message: "Description must be  at least 6 characters"
+  })
+});

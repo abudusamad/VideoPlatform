@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { signOut, useSession } from "next-auth/react";
+
 import { MenuIcon } from "lucide-react";
 import { AvatarImg } from "./avatarImage";
 

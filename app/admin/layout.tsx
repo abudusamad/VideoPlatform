@@ -8,7 +8,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div>
       <Navbar />
-      {children}
+      <main className="mt-20 ">{children}</main>
     </div>
   );
 };

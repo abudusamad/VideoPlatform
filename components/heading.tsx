@@ -25,12 +25,12 @@ export const Heading = ({
   as = "h1",
   fontWeight = "font-bold",
 }: Props) => {
-  const className = `font-${fontWeight} mb-4 text-slate-600`;
+  const className = `font-${fontWeight}  text-slate-600`;
 
   switch (as) {
     case "h1":
       return (
-        <h1 className={`text-4xl ${font.className} mb-8 text-slate-700`}>
+        <h1 className={`text-4xl ${font.className} mb-2 text-slate-700`}>
           {children}
         </h1>
       );
