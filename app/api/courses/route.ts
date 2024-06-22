@@ -1,7 +1,6 @@
 import getCurrentUser from "@/actions/get-current-user";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
-import slugify from '@sindresorhus/slugify';
 
 
 export async function POST(req: Request) {
@@ -21,13 +20,8 @@ export async function POST(req: Request) {
             data: {
                 name,
                 description,
-               slug: slugify(name),
-            author: {
-              connect: {
-                id: currentUser.id,
-              }
-            }
-            },
+               authorId: currentUser.id,
+            }           
         });
 
         return NextResponse.json(course);
