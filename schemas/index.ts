@@ -37,7 +37,7 @@ export const NewPasswordSchema = z.object({
 });
 
 export const CreateVideoSchema  = z.object({
-  title: z.string().min(1, {
+  name: z.string().min(1, {
     message: "Title is required",
   }),
     description: z.string().min(3, {

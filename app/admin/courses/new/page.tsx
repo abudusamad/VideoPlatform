@@ -24,16 +24,14 @@ import { toast } from "react-toastify";
 import { CreateVideoSchema } from "@/schemas";
 import { CheckboxForm } from "@/components/checkbox";
 
-
-
-
 const AdminNewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const form = useForm<z.infer<typeof CreateVideoSchema>>({
     resolver: zodResolver(CreateVideoSchema),
     defaultValues: {
-      title: " ",
+      name: " ",
+      description: " ",
     },
   });
 
@@ -62,7 +60,7 @@ const AdminNewPage = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
           <FormField
             control={form.control}
-            name="title"
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-xl">Video Title</FormLabel>
@@ -94,9 +92,7 @@ const AdminNewPage = () => {
               </FormItem>
             )}
           />
-          <CheckboxForm
-          label="Publish Video"
-          />
+          <CheckboxForm label="Publish Video" />
           <div className="flex items-center gap-x-2">
             <Link href="/">
               <Button type="button" variant="ghost">
