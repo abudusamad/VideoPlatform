@@ -79,9 +79,10 @@ model PasswordResetToken {
 
 
 model Course {
-  id          Int      @id @default(autoincrement())
+  id          String      @id @default(cuid())
   name        String
   description String
+  slug           String
   lessons     Lesson[]
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
@@ -89,20 +90,20 @@ model Course {
 }
 
 model Lesson {
-  id             Int                  @id @default(autoincrement())
+  id             String                  @id @default(uuid())
   name           String
   description    String
   slug           String
   course         Course               @relation(fields: [courseId], references: [id])
-  courseId       Int
+  courseId       String
   video          Video?
   usersCompleted UserLessonProgress[]
 }
 
 model Video {
-  id                Int     @id @default(autoincrement())
+  id                String     @id @default(cuid())
   lesson            Lesson? @relation(fields: [lessonId], references: [id])
-  lessonId          Int?    @unique
+  lessonId          String?    @unique
   owner             User    @relation(fields: [ownerId], references: [id])
   ownerId           String
   uploadId          String  @unique
@@ -118,7 +119,7 @@ model UserLessonProgress {
   user        User     @relation(fields: [userId], references: [id])
   userId      String // relation scalar field (used in the `@relation` attribute above)
   lesson      Lesson   @relation(fields: [lessonId], references: [id])
-  lessonId    Int // relation scalar field (used in the `@relation` attribute above)
+  lessonId    String // relation scalar field (used in the `@relation` attribute above)
   completedAt DateTime @default(now())
 
   @@id([userId, lessonId])
