@@ -30,6 +30,11 @@ model User {
   password      String?
   role          UserRole @default(USER)
   accounts      Account[]
+  courses          Course[]
+  videos           Video[]
+  completedLessons UserLessonProgress[]
+
+
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   
@@ -73,3 +78,49 @@ model PasswordResetToken {
 }
 
 
+model Course {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  slug        String
+  lessons     Lesson[]
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  published   Boolean  @default(false)
+}
+
+model Lesson {
+  id             Int                  @id @default(autoincrement())
+  name           String
+  description    String
+  slug           String
+  course         Course               @relation(fields: [courseId], references: [id])
+  courseId       Int
+  video          Video?
+  usersCompleted UserLessonProgress[]
+}
+
+model Video {
+  id                Int     @id @default(autoincrement())
+  lesson            Lesson? @relation(fields: [lessonId], references: [id])
+  lessonId          Int?    @unique
+  owner             User    @relation(fields: [ownerId], references: [id])
+  ownerId           String
+  uploadId          String  @unique
+  publicPlaybackId  String?
+  privatePlaybackId String?
+  duration          Float?
+  aspectRatio       String?
+  status            String  @default("preparing")
+  posterTime        Float?
+}
+
+model UserLessonProgress {
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String // relation scalar field (used in the `@relation` attribute above)
+  lesson      Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId    Int // relation scalar field (used in the `@relation` attribute above)
+  completedAt DateTime @default(now())
+
+  @@id([userId, lessonId])
+}
