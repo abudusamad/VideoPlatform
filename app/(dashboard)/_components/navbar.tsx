@@ -2,6 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 import { useRouter } from "next/navigation";
+import { User } from "lucide-react";
+import { UserMenu } from "./usermenu";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -19,6 +21,7 @@ export const Navbar = () => {
         >
           sign up
         </Button>
+        <UserMenu/>
       </div>
     </div>
   );

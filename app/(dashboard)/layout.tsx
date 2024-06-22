@@ -1,5 +1,5 @@
+import { SessionProvider } from "next-auth/react";
 import { Navbar } from "./_components/navbar";
-
 
 interface DashBoardLayoutProps {
   children: React.ReactNode;
@@ -8,8 +8,10 @@ interface DashBoardLayoutProps {
 const DashBoardLayout = ({ children }: DashBoardLayoutProps) => {
   return (
     <>
-      <Navbar />
-      {children}
+      <SessionProvider>
+        <Navbar />
+        {children}
+      </SessionProvider>
     </>
   );
 };
