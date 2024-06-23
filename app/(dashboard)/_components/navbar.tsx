@@ -12,7 +12,7 @@ export const Navbar = () => {
   return (
     <div className="z-50 bg-background fixed top-0 flex items-center justify-between w-full p-2  border-b-[1px] shadow-sm px-8">
       <Logo />
-      <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
+      <div className="ml-auto justify-end w-full flex items-center gap-x-2">
         {!session ? (
           <>
             <Button
