@@ -42,7 +42,7 @@ const CourseIdPage = async ({
         <div>
           <CourseUpdate initialData={course} courseId={course.id} />
         </div>
-        <Link href={`/admin/courses/${course.id}/video`}>
+        <Link href={`/admin/courses/${course.id}/video/`}>
           <div className="flex items-center gap-x-2">
             <IconBadge icon={Video} />
             <h2 className="text-xl">Add a video</h2>

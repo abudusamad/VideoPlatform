@@ -1,81 +1,60 @@
-import getCurrentUser from "@/actions/get-current-user";
-import { Container } from "@/components/container";
-import { db } from "@/lib/db";
-import { ArrowLeft, Video } from "lucide-react";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { VideoActions } from "./_components/video-action";
-import { IconBadge } from "@/components/icon-badge";
-import { Banner } from "@/components/banner";
-import { VideoForm } from "./_components/video-form";
+"use client";
 
-const CourseIdVideoPage = async ({
-  params,
-}: {
-  params: { courseId: string };
-}) => {
-  const currentUser = await getCurrentUser();
-  if (!currentUser) {
-    return redirect("/auth/login");
-  }
+import * as z from "zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { FileUpload } from "@/components/file-upload";
 
-  const video = await db.video.findUnique({
-    where: {
-      id: currentUser.id,
-      courseId: params.courseId,
-    },
-    include: {
-      muxData: true,
-    },
-  });
+interface VideoProps {
+  courseId: string;
+}
 
-  if (!video) {
-    return redirect(`/admin/courses/${params.courseId}`);
-  }
+const formSchema = z.object({
+  videoUrl: z.string().min(1),
+});
+const VideoPage = ({ courseId }: VideoProps) => {
+  const router = useRouter();
 
-  const requiredFields = [video.videoUrl];
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await axios.post(
+        `/api/courses/${courseId}/video`,
+        values
+      );
+      router.push(`/admin/courses/${courseId}/video/${response.data.id}`);
+      toast.success("Video uploaded");
+      console.log("values", values);
 
-  const totalFields = requiredFields.length;
-  const completedFields = requiredFields.filter(Boolean).length;
+      router.refresh();
+    } catch {
+      toast.error("Something went wrong");
+    }
+  };
 
-  const completionText = `(${completedFields}/${totalFields})`;
-
-  const isComplete = requiredFields.every(Boolean);
   return (
-    <Container>
-      {!video.isPublished && (
-        <Banner
-          variant="warning"
-          label="This chapter is unpublished. It will not be visible in the course"
-        />
-      )}
-      <div className="p-6">
-        <div className="flex items-center justify-between">
-          <div className="w-full">
-            <Link
-              href={`/admin/courses/${params.courseId}`}
-              className="flex items-center text-sm hover:opacity-75 transition mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to course update
-            </Link>
-            <div className="flex items-center justify-between w-full">
-              <VideoActions
-                disabled={!isComplete}
-                courseId={params.courseId}
-                isPublished={video.isPublished}
-              />
-            </div>
+    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+      <div className="relative aspect-video mt-2">
+        <div className="text-xs text-muted-foreground mt-4">
+          Upload this chapter&apos;s video
+        </div>
+        <div>
+          <FileUpload
+            endpoint="video"
+            onChange={(url) => {
+              if (url) {
+                onSubmit({ videoUrl: url });
+              }
+            }}
+          />
+          <div className="text-xs text-muted-foreground mt-4">
+            Upload this chapter&apos;s video
           </div>
         </div>
-        <div className="flex items-center gap-x-2">
-          <IconBadge icon={Video} />
-          <h2 className="text-xl">Add a video</h2>
-        </div>
-        <VideoForm initialData={video} courseId={params.courseId} />
       </div>
-    </Container>
+      <div className="text-xs text-muted-foreground mt-2"></div>
+    </div>
   );
 };
 
-export default CourseIdVideoPage;
+export default VideoPage;
