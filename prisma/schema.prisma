@@ -32,7 +32,7 @@ model User {
   accounts      Account[]
   courses          Course[]
   videos           Video[]
-  completedLessons UserLessonProgress[]
+
 
 
   createdAt     DateTime  @default(now())
@@ -83,44 +83,40 @@ model Course {
   name        String
   description String
   slug           String
-  lessons     Lesson[]
+  video     Video[]
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
   isPublished   Boolean  @default(false)
 }
 
-model Lesson {
-  id             String                  @id @default(uuid())
-  name           String
-  description    String
-  slug           String
-  course         Course               @relation(fields: [courseId], references: [id])
-  courseId       String
-  video          Video?
-  usersCompleted UserLessonProgress[]
-}
-
 model Video {
-  id                String     @id @default(cuid())
-  lesson            Lesson? @relation(fields: [lessonId], references: [id])
-  lessonId          String?    @unique
-  owner             User    @relation(fields: [ownerId], references: [id])
-  ownerId           String
-  uploadId          String  @unique
-  publicPlaybackId  String?
-  privatePlaybackId String?
-  duration          Float?
-  aspectRatio       String?
-  status            String  @default("preparing")
-  posterTime        Float?
+  id String @id @default(uuid())
+  title String
+  description String? 
+  videoUrl String?
+  position Int
+  isPublished Boolean @default(false)
+  isFree Boolean @default(false)
+
+  muxData MuxData?
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  uploader  User     @relation(fields: [uploaderId], references: [id])
+  uploaderId String  // This fi
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
 }
 
-model UserLessonProgress {
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String // relation scalar field (used in the `@relation` attribute above)
-  lesson      Lesson   @relation(fields: [lessonId], references: [id])
-  lessonId    String // relation scalar field (used in the `@relation` attribute above)
-  completedAt DateTime @default(now())
+model MuxData {
+  id String @id @default(uuid())
+  assetId String
+  playbackId String?
 
-  @@id([userId, lessonId])
+  videoId String @unique
+  video Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
 }
