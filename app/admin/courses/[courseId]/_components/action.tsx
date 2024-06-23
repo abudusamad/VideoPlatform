@@ -22,7 +22,7 @@ export const ActionForm = ({ courseId }: ActionFormProps) => {
       await axios.delete(`/api/courses/${courseId}`);
       toast.success("Chapter deleted");
       router.refresh();
-      router.push(`/admin/courses`);
+      router.push(`/admin/courses/new`);
     } catch {
       toast.error("Something went wrong");
     } finally {
