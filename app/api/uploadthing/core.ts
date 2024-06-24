@@ -1,22 +1,19 @@
 
 import getCurrentUser from "@/actions/get-current-user";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { UploadThingError } from "uploadthing/server";
 const f = createUploadthing();
 
 const handleAuth = async() => {
-	const currentUser = await getCurrentUser()
-	if (!currentUser) throw new Error("Unauthorized");
+	const currentUser = await getCurrentUser();
+	if (!currentUser) {
+		return {error: new UploadThingError("Unauthorized")}
+	}
 	return { currentUser };
 };
 
 export const ourFileRouter = {
-	courseImage: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
-		.middleware(() => handleAuth())
-		.onUploadComplete(() => {}),
-	courseAttachment: f(["text", "image", "video", "audio", "pdf"])
-		.middleware(() => handleAuth())
-		.onUploadComplete(() => {}),
-	video: f({ video: { maxFileCount: 1, maxFileSize: "512GB" } })
+	videoFile: f({ video: { maxFileCount: 1, maxFileSize: "16MB"} })
 		.middleware(() => handleAuth())
 		.onUploadComplete(() => {}),
 } satisfies FileRouter;

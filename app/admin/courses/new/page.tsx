@@ -55,6 +55,7 @@ const AdminNewPage = () => {
   }
 
   return (
+
     <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
