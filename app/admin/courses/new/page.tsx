@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { CreateVideoSchema } from "@/schemas";
 import { CheckboxForm } from "@/components/checkbox";
+import { Container } from "@/components/container";
 
 const AdminNewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,58 +56,62 @@ const AdminNewPage = () => {
   }
 
   return (
-
-    <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xl">Video Title</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isSubmitting}
-                    placeholder="e.g. 'Enter Video title '"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-xl">Video description</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isSubmitting}
-                    placeholder="e.g. 'Enter video description"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <CheckboxForm label="Publish Video" />
-          <div className="flex items-center gap-x-2">
-            <Link href="/">
-              <Button type="button" variant="ghost">
-                Cancel
+    <Container>
+      <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 mt-8"
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xl">Video Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isSubmitting}
+                      placeholder="e.g. 'Enter Video title '"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xl">Video description</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isSubmitting}
+                      placeholder="e.g. 'Enter video description"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <CheckboxForm label="Publish Video" />
+            <div className="flex items-center gap-x-2">
+              <Link href="/">
+                <Button type="button" variant="ghost">
+                  Cancel
+                </Button>
+              </Link>
+              <Button type="submit" disabled={!isValid || isSubmitting}>
+                Continue
               </Button>
-            </Link>
-            <Button type="submit" disabled={!isValid || isSubmitting}>
-              Continue
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
+            </div>
+          </form>
+        </Form>
+      </div>
+    </Container>
   );
 };
 
