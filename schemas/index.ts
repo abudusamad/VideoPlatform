@@ -47,14 +47,10 @@ export const CreateVideoSchema  = z.object({
 
 
 export const VideoSchema  = z.object({
-  name: z.string().min(1, {
+  title: z.string().min(1, {
     message: "Title is required",
   }),
     description: z.string().min(3, {
       message: "Description must be  at least 6 characters"
     })
-  ,
-  videoUrl: z.string().url({
-    message: "Please enter a valid URL"
-  })
 });

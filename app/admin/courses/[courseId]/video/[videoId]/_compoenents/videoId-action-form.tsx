@@ -9,17 +9,19 @@ import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 import { toast } from "react-toastify";
 
-interface VideoActionsProps {
+interface VideoIdActionsProps {
   disabled: boolean;
   courseId: string;
+  videoId: string;
   isPublished: boolean;
 }
 
-export const VideoActions = ({
+export const VideoIdActions = ({
   disabled,
   courseId,
+  videoId,
   isPublished,
-}: VideoActionsProps) => {
+}: VideoIdActionsProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,14 +31,12 @@ export const VideoActions = ({
 
       if (isPublished) {
         await axios.patch(
-          `/api/courses/${courseId}/video/unpublish`
+          `/api/courses/${courseId}/video/${videoId}/unpublish`
         );
-        toast.success("Course unpublished");
+        toast.success("Video unpublished");
       } else {
-        await axios.patch(
-          `/api/courses/${courseId}/video/publish`
-        );
-        toast.success("Course published");
+        await axios.patch(`/api/courses/${courseId}/video/${videoId}/publish`);
+        toast.success("Video published");
       }
 
       router.refresh();
@@ -51,11 +51,11 @@ export const VideoActions = ({
     try {
       setIsLoading(true);
 
-      await axios.delete(`/api/courses/${courseId}/video`);
+      await axios.delete(`/api/courses/${courseId}/video/${videoId}`);
 
-      toast.success("video deleted");
+      toast.success("Video deleted");
       router.refresh();
-      router.push(`/teacher/courses/${courseId}`);
+      router.push(`/admin/courses/${courseId}`);
     } catch {
       toast.error("Something went wrong");
     } finally {

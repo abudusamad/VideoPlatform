@@ -4,9 +4,9 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { CourseUpdate } from "./_components/course-update";
 import { ActionForm } from "./_components/action";
-import Link from "next/link";
 import { IconBadge } from "@/components/icon-badge";
 import { Video } from "lucide-react";
+import { VideoForm } from "./_components/video-form";
 
 const CourseIdPage = async ({
   params,
@@ -41,13 +41,10 @@ const CourseIdPage = async ({
         </div>
         <div>
           <CourseUpdate initialData={course} courseId={course.id} />
+          <IconBadge icon={Video} />
+          <h2 className="text-xl">Add a video</h2>
+          <VideoForm courseId={params.courseId} />
         </div>
-        <Link href={`/admin/courses/${course.id}/video/`}>
-          <div className="flex items-center gap-x-2">
-            <IconBadge icon={Video} />
-            <h2 className="text-xl">Add a video</h2>
-          </div>
-        </Link>
       </div>
     </Container>
   );

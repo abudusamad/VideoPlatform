@@ -92,18 +92,17 @@ model Course {
 model Video {
   id String @id @default(uuid())
   title String
-  description String? 
+  description String
   videoUrl String?
-  position Int
+  slug String?
   isPublished Boolean @default(false)
-  isFree Boolean @default(false)
 
   muxData MuxData?
 
   courseId String
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
   uploader  User     @relation(fields: [uploaderId], references: [id])
-  uploaderId String  // This fi
+  uploaderId String  
 
 
   createdAt DateTime @default(now())

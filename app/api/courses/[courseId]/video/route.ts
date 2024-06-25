@@ -1,5 +1,6 @@
 import getCurrentUser from "@/actions/get-current-user";
 import { db } from "@/lib/db";
+import slugify from "@sindresorhus/slugify";
 import { NextResponse } from "next/server";
 
 export async function POST(
@@ -7,42 +8,34 @@ export async function POST(
 	{ params }: { params: { courseId: string } }
 ) {
 	try {
-		const currentUser = await getCurrentUser()
+		const currentUser = await getCurrentUser();
 		const body = await req.json();
-
 		if (!currentUser) {
 			return new NextResponse("Unauthorized", { status: 401 });
 		}
-
-		const { title, description, videoUrl,...values } = body;
-		if (!title || !description || !videoUrl) {
-			return new NextResponse("Missing Required fields",{status:400})
-		}
 		
-		const ownCourse = await db.course.findUnique({
-			where: {
-                id: params.courseId,
-                authorId: currentUser.id,
-			},
-		});
-
-		if (!ownCourse) {
-			return new NextResponse("Unauthorized", { status: 401 });
-        }
+		const { title, description} = body;
+		if (!title || !description ) {
+			return new NextResponse("Missing required fields", { status: 400 });
+		}
 		const video = await db.video.create({
 			
-            data: {
-				id: currentUser.id,
+			data: {
+				id:currentUser.id,
 				title,
 				description,
-				videoUrl,
-				...values,
+				slug: slugify(title),
+				uploader: {
+					connect: {
+						id: currentUser.id,
+					},
+				},
 				course: {
 					connect: {
 						id: params.courseId,
 					},
 				},
-            },
+			}
         });
 
 		
