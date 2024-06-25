@@ -26,35 +26,40 @@ export async function PATCH(
 			return new NextResponse("Unauthorized", { status: 401 });
 		}
 
-		const unpublishedChapter = await db.video.update({
+		const video = await db.video.findUnique({
+			where: {
+				id: params.videoId,
+				courseId: params.courseId,
+			},
+		});
+
+		const muxData = await db.muxData.findUnique({
+			where: {
+				videoId: params.videoId,
+			},
+		});
+
+		if (
+			!video ||
+			!muxData ||
+			!video.title ||
+			!video.description ||
+			!video.videoUrl
+		) {
+			return new NextResponse("Missing required fields", { status: 400 });
+		}
+
+		const publishedChapter = await db.video.update({
 			where: {
 				id: params.videoId,
 				courseId: params.courseId,
 			},
 			data: {
-				isPublished: false,
-			},
-		});
-
-		const publishedChaptersInCourse = await db.video.findMany({
-			where: {
-				courseId: params.courseId,
 				isPublished: true,
 			},
 		});
 
-		if (!publishedChaptersInCourse.length) {
-			await db.course.update({
-				where: {
-					id: params.courseId,
-				},
-				data: {
-					isPublished: false,
-				},
-			});
-		}
-
-		return NextResponse.json(unpublishedChapter);
+		return NextResponse.json(publishedChapter);
 	} catch (error) {
 		console.log("[CHAPTER_PUBLISH]", error);
 		return new NextResponse("Internal Error", { status: 500 });
