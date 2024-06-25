@@ -10,9 +10,9 @@ const CoursePage = async () => {
         redirect("/auth/login");
     }
 
-  const courses = await db.course.findMany({
+  const video = await db.video.findMany({
     where: {
-      authorId: currentUser.id,
+      uploaderId: currentUser.id,
     },
     orderBy: {
       createdAt: "desc",
@@ -21,7 +21,7 @@ const CoursePage = async () => {
   return (
     <div className="p-6">
       <div className="containermx-auto py-10">
-        <DataTable columns={columns} data={courses} />
+        <DataTable columns={columns} data={video} />
       </div>
     </div>
   );

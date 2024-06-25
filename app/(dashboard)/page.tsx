@@ -15,7 +15,7 @@ export default function Home() {
     <main className="flex h-full flex-col items-center justify-center">
       <Container>
         <Heading as="h1">Draft courses are only visible to you</Heading>
-        <Link href="/admin">
+        <Link href="/admin/courses">
           <Button variant="blue">Go to Admin</Button>
         </Link>
       </Container>

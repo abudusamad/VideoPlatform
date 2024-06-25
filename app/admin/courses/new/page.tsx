@@ -68,7 +68,7 @@ const AdminNewPage = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xl">Video Title</FormLabel>
+                  <FormLabel className="text-xl">Course Title</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
@@ -85,7 +85,7 @@ const AdminNewPage = () => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xl">Video description</FormLabel>
+                  <FormLabel className="text-xl">Course description</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
