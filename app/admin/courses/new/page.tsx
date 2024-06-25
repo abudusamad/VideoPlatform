@@ -22,7 +22,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { CreateVideoSchema } from "@/schemas";
-import { CheckboxForm } from "@/components/checkbox";
 import { Container } from "@/components/container";
 
 const AdminNewPage = () => {

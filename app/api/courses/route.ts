@@ -22,19 +22,16 @@ export async function POST(req: Request) {
                 id: currentUser.id,
                 name,
                 description,
-                 slug: slugify(name),
-            author: {
-              connect: {
-                id: currentUser.id,
-              },
-              }
+                slug: slugify(name),
+                authorId: currentUser.id
+                
             }           
         });
 
         return NextResponse.json(course);
         
     } catch (error) {
-        console.log("[Video Create Error]: ", error);
+        console.log("[Course Create Error]: ", error);
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
