@@ -13,8 +13,8 @@ export async function PATCH(req: Request, { params }: {
         }
        const body = await req.json();
 
-        const { name, description } = body;
-        if (!name || !description) {
+        const { name, description, imageUrl } = body;
+        if (!name || !description || !imageUrl) {
             return new NextResponse("Missing required fields", { status: 400 });
         }
         
@@ -25,7 +25,8 @@ export async function PATCH(req: Request, { params }: {
             },
             data: {
                 name,
-                description
+				description,
+				imageUrl
             }
         })
            

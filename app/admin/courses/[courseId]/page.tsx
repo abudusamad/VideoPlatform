@@ -7,6 +7,7 @@ import { ActionForm } from "./_components/action";
 import { IconBadge } from "@/components/icon-badge";
 import { Video } from "lucide-react";
 import { VideoForm } from "./_components/video-form";
+import { ImageForm } from "./_components/image-form";
 
 const CourseIdPage = async ({
   params,
@@ -41,6 +42,7 @@ const CourseIdPage = async ({
         </div>
         <div>
           <CourseUpdate initialData={course} courseId={course.id} />
+          <ImageForm initialData={course} courseId={course.id} />
         </div>
         <div className="flex flex-col items-center justify-center">
           <IconBadge icon={Video} />

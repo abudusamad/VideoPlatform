@@ -1,18 +1,28 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Logo } from "./logo";
-import { useRouter } from "next/navigation";
+
+import { useRouter, usePathname } from "next/navigation";
 import { UserMenu } from "./usermenu";
 import { useSession } from "next-auth/react";
+import { SearchInput } from "@/components/search-input";
+import { Logo } from "./logo";
+import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = useSession();
 
+  const isHome = pathname === "/";
+
   return (
-    <div className="z-50 bg-background fixed top-0 flex items-center justify-between w-full p-2  border-b-[1px] shadow-sm px-8">
-      <Logo />
-      <div className="ml-auto justify-end w-full flex items-center gap-x-2">
+    <div className="z-50 bg-background fixed top-0 flex items-center justify-between w-full p-2 border-b-[1px] shadow-sm px-8">
+      <div className="flex-grow-0">
+        <Logo />
+      </div>
+      <div className="flex-grow justify-center hidden md:flex">
+        {isHome && <SearchInput />}
+      </div>
+      <div className="flex flex-end justify-end">
         {!session ? (
           <>
             <Button
@@ -26,13 +36,11 @@ export const Navbar = () => {
               size="default"
               onClick={() => router.push("/auth/register")}
             >
-              sign up
+              Sign Up
             </Button>
           </>
         ) : (
-          <>
-            <UserMenu />
-          </>
+          <UserMenu />
         )}
       </div>
     </div>

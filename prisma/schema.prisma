@@ -83,6 +83,7 @@ model Course {
   name        String
   description String
   slug           String
+  imageUrl    String? 
   video     Video[]
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
