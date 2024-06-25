@@ -41,6 +41,8 @@ const CourseIdPage = async ({
         </div>
         <div>
           <CourseUpdate initialData={course} courseId={course.id} />
+        </div>
+        <div className="flex flex-col items-center justify-center">
           <IconBadge icon={Video} />
           <h2 className="text-xl">Add a video</h2>
           <VideoForm courseId={params.courseId} />

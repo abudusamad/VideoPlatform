@@ -97,7 +97,6 @@ const AdminNewPage = () => {
                 </FormItem>
               )}
             />
-            <CheckboxForm label="Publish Video" />
             <div className="flex items-center gap-x-2">
               <Link href="/">
                 <Button type="button" variant="ghost">
