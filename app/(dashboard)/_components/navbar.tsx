@@ -24,7 +24,7 @@ export const Navbar = () => {
       </div>
       <div className="flex flex-end justify-end">
         {!session ? (
-          <>
+          <div className="flex items-center content-between gap-x-4">
             <Button
               variant="outline"
               onClick={() => router.push("/auth/login")}
@@ -38,7 +38,7 @@ export const Navbar = () => {
             >
               Sign Up
             </Button>
-          </>
+          </div>
         ) : (
           <UserMenu />
         )}

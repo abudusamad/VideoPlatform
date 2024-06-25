@@ -13,7 +13,7 @@ import { FileUpload } from "@/components/file-upload";
 import { toast } from "react-toastify";
 
 interface ImageFormProps {
-  initialData: Course;
+    initialData: Course;
   courseId: string;
 }
 

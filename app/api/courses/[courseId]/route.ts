@@ -7,26 +7,19 @@ export async function PATCH(req: Request, { params }: {
     params:{courseId: string}
 }) {
     try {
-        const currentUser = await getCurrentUser();
+		const currentUser = await getCurrentUser();
+		const value = await req.json();
         if (!currentUser) {
             return new NextResponse("Unauthorised", { status: 401 });
         }
-       const body = await req.json();
-
-        const { name, description, imageUrl } = body;
-        if (!name || !description || !imageUrl) {
-            return new NextResponse("Missing required fields", { status: 400 });
-        }
-        
+    
         const course = await db.course.update({
             where: {
                 id: params.courseId,
                 authorId: currentUser.id
             },
             data: {
-                name,
-				description,
-				imageUrl
+               ...value,
             }
         })
            

@@ -33,21 +33,24 @@ const CourseIdPage = async ({
 
   return (
     <Container>
-      <div className="flex flex-col gap-6">
+      <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
             <h1 className="text-3xl font-medium">Course setup</h1>
           </div>
           <ActionForm courseId={params.courseId} />
         </div>
-        <div>
-          <CourseUpdate initialData={course} courseId={course.id} />
-          <ImageForm initialData={course} courseId={course.id} />
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <IconBadge icon={Video} />
-          <h2 className="text-xl">Add a video</h2>
-          <VideoForm courseId={params.courseId} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6
+        mt-16">
+          <div>
+            <CourseUpdate initialData={course} courseId={course.id} />
+            <ImageForm initialData={course} courseId={course.id} />
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <IconBadge icon={Video} />
+            <h2 className="text-xl">Add a video</h2>
+            <VideoForm courseId={params.courseId} />
+          </div>
         </div>
       </div>
     </Container>
