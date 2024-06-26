@@ -1,4 +1,4 @@
-# Next.js 14 Notion
+# BrandVid[logo](/public/logo.svg)
 
 ![demo](/public/image/Screenshot%20from%202024-05-29%2021-50-41.png)
 
@@ -6,11 +6,12 @@
 
 ## 🌐 Live Demo
 
-Explore the live demonstration of the project: [hnh-accommodation](https://front-end-smoky-eight.vercel.app/)
+Explore the live demonstration of the project: [BrandVid](https://video-platform-sable.vercel.app/)
 
 ## 📝 Description
 
-**Notion** is a Notion-like application built with Next.js 14, React, Convex, Tailwind, Clerk, and EdgeStore. It is a real-time database and Notion-style editor that allows you to create, edit, and delete documents. It also allows you to publish your note to the web.
+**BrandVid** BrandVid is all about providing a bespoke video hosting platform that emphasizes brand consistency, content control, and a professional user experience. It caters to businesses, educators, and creative professionals who need a reliable and customizable 
+solution for hosting and sharing their video content.
 
 <details><summary><b>Folder Structure</b></summary>
 
@@ -90,7 +91,7 @@ app
 
 <details><summary>Table of Contents</summary>
 
-- [Next.js 14 Notion](#nextjs-14-notion)
+- [BrandVid](#brandvidlogo)
   - [🌐 Live Demo](#-live-demo)
   - [📝 Description](#-description)
   - [📖 Table of Contents](#-table-of-contents)
@@ -116,19 +117,21 @@ app
 
 ## ✨ Technologies Used
 
-<details><summary><b>Notion</b> is built using the following technologies:</summary>
+<details><summary><b>BrandVid</b> is built using the following technologies:</summary>
 
 - [TypeScript](https://www.typescriptlang.org/): TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
 - [Next.js](https://nextjs.org/): Next.js is a React framework for building server-side rendered and statically generated web applications.
 - [Tailwind CSS](https://tailwindcss.com/): Tailwind CSS is a utility-first CSS framework for rapidly building custom user interfaces.
-- [Convex](https://convex.dev/): Convex is a TypeScript-first ORM for Node.js and the browser.
-- [Clerk](https://clerk.dev/): Clerk is a developer-first identity and user management service.
-- [ESLint](https://eslint.org/): ESLint is a static code analysis tool for
-  identifying problematic patterns found in JavaScript code.
+- [Prisma](https://www.prisma.io/): Prisma is a modern database access toolkit that makes it easy to build type-safe, composable database access.
+- [React Hook Form](https://react-hook-form.com/): React Hook Form is a performant, flexible and extensible forms with easy-to-use validation.
+- [React Query](https://react-query.tanstack.com/): React Query is a data-fetching library for React that helps you fetch, cache, and update data in your React applications.
+- [ESLint](https://eslint.org/): ESLint is a static code analysis tool for identifying problematic patterns found in JavaScript code.
 - [Prettier](https://prettier.io/): Prettier is an opinionated code formatter.
 - [Shadcn-UI](https://ui.shadcn.com/): Shadcn UI is a React UI library that helps developers rapidly build modern web applications.
 - [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction): Zustand is a small, fast and scalable bearbones state-management solution.
-- [BlockNote](https://blocknote.dev/): BlockNote is a Notion-like editor for React.
+- [NextAuth.js](https://next-auth.js.org/): NextAuth.js is a complete open source authentication solution for Next.js applications.
+- [useHooks TS](https://usehooks-ts.com/): useHooks TS is a collection of reusable React hooks.
+- [NeonDb](https://neondb.dev/): NeonDb is a simple, fast, and lightweight database for your next project.
 - [Zod](https://zod.dev/): Zod is a TypeScript-first schema declaration and validation library.
 - [Vercel](https://vercel.com/): Vercel is a cloud platform for frontend developers, providing the frameworks, workflows, and infrastructure to build a faster, more personalized Web.
 
@@ -152,20 +155,25 @@ In order to install and run this project locally, you would need to have the fol
 
 **Step 0:**
 
-Note :bangbang: the application uses Convex for ORM, therefore, you need to create Convex account [here](https://convex.dev/) and sets the `CONVEX_DEPLOY_KEY` and `NEXT_PUBLIC_CONVEX_URL` environment variables in `.env` file.
+Note: The application uses Prisma for ORM, therefore, you need to create Convex account [here](https://www.prisma.io/)  `.env` file.
 
-Note :bangbang: the application uses Clerk for Authentication and User Management, therefore, you need to create Clerk account [here](https://clerk.dev/) and sets the `CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` environment variables in `.env` file.
+Note: The application uses AuthJs for Authentication and User Management, therefore, you need to create Auth account [here](https://www.prisma.io/) and sets the `AUTH_SECRET` environment variables in `.env` file.
 
-Note :bangbang: the application uses EdgeStore for file uploads, therefore, you need to create EdgeStore account [here](https://edgestore.dev/) and sets the `EDGE_STORE_ACCESS_KEY` and `EDGE_STORE_SECRET_KEY` environment variables in `.env` file.
+Note: The application uses Uploadthing for file uploads, therefore, you need to create Uploadthing account [here](https://uploadthing.com/) and sets the `UPLOADTHING_APP_ID` and `UPLOADTHING_SECRET` environment variables in `.env` file.
 
-Also, you need to create a JWT template in Clerk and define the JWKS Endpoint as a provider inside `convex/auth.config.js` file.
+Note: The application uses MuxPlayer for image and video preload, therefore, you need to create Cloudinary account [here](https://www.mux.com/player) and sets the `MUX_TOKEN_SECRET`,  and `MUX_TOKEN_ID` environment variables in `.env` file.
+
+Note: The application uses Github and Google for OAuth, therefore, you need to create Github [here](https://github.com/) and Google OAuth account [here](https://console.cloud.google.com/) and sets the `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET` environment variables in `.env` file.
+
+Also, you need to create a JWT template in Clerk and define the JWKS Endpoint as a provider inside `/auth.config.js` file.
+
 
 **Step 1:**
 
 Download or clone this repo by using the link below:
 
 ```bash
-git clone https://github.com/abudusamad/notion-clone.git
+git clone https://github.com/abudusamad/VideoPlatform.git
 ```
 
 **Step 2:**
@@ -174,6 +182,10 @@ Execute the following command in the root directory of the downloaded repo in or
 
 ```bash
 npm install
+```
+or install with legacy peer dependencies which fixes with incompatible peer dependencies
+```bash
+npm install --legacy-peer-deps
 ```
 
 **Step 3:**
@@ -202,36 +214,32 @@ All scripts are defined in the `package.json` file. Here is a list of all script
 
 ## 🔒 Environment Variables
 
-Environment variables[^6] can be used for configuration. They must be set before running the app.
+Environment variables can be used for configuration. They must be set before running the app.
 
 > [Environment variables](https://en.wikipedia.org/wiki/Environment_variable) are variables that are set in the operating system or shell, typically used to configure programs.
 
-**Notion** uses [Convex](https://appwrite.io), and [Clerk](https://clerk.com) as external services. You need to create an accounts on Convex and Clerk and get the required credentials to run the app.
+**BrandVide** uses . You need to create an accounts on Convex and Clerk and get the required credentials to run the app.
 
 Create a `.env` file in the root directory of the project and add the following environment variables:
 
 ```env
-CONVEX_DEPLOY_KEY=<CONVEX_DEPLOY_URL>
-NEXT_PUBLIC_CONVEX_URL=<NEXT_PUBLIC_CONVEX_URL>
+AUTH_SECRET=
 
-CLERK_PUBLISHABLE_KEY=<CLERK_PUBLISHABLE_KEY>
-CLERK_SECRET_KEY=<CLERK_SECRET_KEY>
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
 
-EDGE_STORE_ACCESS_KEY=<EDGE_STORE_ACCESS_KEY>
-EDGE_STORE_SECRET_KEY=<EDGE_STORE_SECRET_KEY>
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
-DATABASE_URL=<DATABASE_URL>
-GOOGLE_CLIENT_ID=<GOOGLE_CLIENT>
-GOOGLE_CLIENT_SECRET=<GOOGLE_SECRET>
-GITHUB_ID=<GITHUB_ID>
-GITHUB_SECRET=<GITHUB_SECRET>
-NEXTAUTH_SECRET=<AUTH_SECRET>
 
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
-NEXT_PUBLIC_CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
+NEXT_PUBLIC_URL=http://localhost:3000
+RESEND_API_KEY=
 
-NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
+MUX_TOKEN_ID=
+MUX_TOKEN_SECRET=
+
+UPLOADTHING_SECRET=
+UPLOADTHING_APP_ID=
 ```
 
 ## 🚀 Deployment
@@ -265,7 +273,6 @@ Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment)
 - 🌐 OAuth Provider (Social login with Google & GitHub)
 - 🔒 Forgot password functionality
 - ✉️ Email verification
-- 📱 Two factor verification
 - 👥 User roles (Admin & User)
 - 🔓 Login component (Opens in redirect or modal)
 - 📝 Register component
@@ -287,51 +294,13 @@ Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment)
 - 👑 Render content for admins using RoleGate component
 - 🛡️ Protect API Routes for admins only
 - 🔐 Protect Server Actions for admins only
-- 📧 Change email with new verification in Settings page
-- 🔑 Change password with old password confirmation in Settings page
 - 🔔 Enable/disable two-factor auth in Settings page
 - 🔄 Change user role in Settings page (for development purposes only)
-- Tailwind design
-- Tailwind animations and effects
-- Full responsiveness
-- Credential authentication
-- Google authentication
-- Github authentication
-- Image upload using Cloudinary CDN
-- Client form validation and handling using react-hook-form
-- Server error handling using react-toast
-- Calendars with react-date-range
-- Page loading state
-- Page empty state
-- Booking / Reservation system
-- Guest reservation cancellation
-- Owner reservation cancellation
-- Creation and deletion of properties
-- Pricing calculation
-- Advanced search algorithm by category, date range, map location, number of guests, rooms and bathrooms
-    - For example we will filter out properties that have a reservation in your desired date range to travel
-- Favorites system
-- Shareable URL filters
-    - Lets say you select a category, location and date range, you will be able to share URL with a logged out friend in another browser and they will see the same results
-- How to write POST and DELETE routes in route handlers (app/api)
-- How to fetch data in server react components by directly accessing database (WITHOUT API! like Magic!)
-- How to handle files like error.tsx and loading.tsx which are new Next 13 templating files to unify loading and error handling
-- How to handle relations between Server and Child components!
-
-## 🔧 Contributing
-
-
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-To fix a bug or enhance an existing module, follow these steps:
-
-1. Fork the repo
-2. Create a new branch (`git checkout -b improve-feature`)
-3. Make the appropriate changes in the files
-4. Commit your changes (`git commit -am 'Improve feature'`)
-5. Push to the branch (`git push origin improve-feature`)
-6. Create a Pull Request 🎉
+- 🙋‍♂️Client form validation and handling using react-hook-form
+- ✅❌Server error and success handling using react-toastisfy
+- 📝Server form validation and handling using zod
+- 🙎‍♀️Admin Can Create, Update, Delete, and View  Videos.🙎‍♀
+- Users can only view videos and share the link to other users
 
 
 ## 💎 Acknowledgements
@@ -339,10 +308,6 @@ To fix a bug or enhance an existing module, follow these steps:
 I'd like to express my gratitude to the following people who helped me with this
 project and made it possible:
 
-- [Clerk](https://clerk.dev/)
-- [Convex](https://convex.dev/)
-- [EdgeStore](https://edgestore.dev/)
-- [BlockNote](https://blocknote.dev/)
 - [Shadcn UI](https://ui.shadcn.com/)
 - [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
 - [useHooks TS](https://usehooks-ts.com/)
@@ -360,10 +325,6 @@ project and made it possible:
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Rea>ct Documentation](https://reactjs.org/docs/getting-started.html)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Convex Documentation](https://convex.dev/docs)
-- [Clerk Documentation](https://docs.clerk.dev/)
-- [EdgeStore Documentation](https://edgestore.dev/docs)
-- [BlockNote Documentation](https://blocknote.dev/docs)
 - [Zustand Documentation](https://docs.pmnd.rs/zustand/getting-started/introduction)
 - [useHooks TS Documentation](https://usehooks-ts.com/)
 - [Sonner Documentation](https://sonner.emilkowal.ski/)
@@ -375,29 +336,24 @@ project and made it possible:
 
 
 ## 📞 Contact Us
--[Twitter](https://twitter.com/abudusamad)
--[LinkedIn](https://www.linkedin.com/in/abubakar-samad-0b0b3b1b4/)
+-[Twitter](https://twitter.com/MascotFord)
+-[LinkedIn](https://www.linkedin.com/in/abudu1234/)
 -[Email](mailto:abudusamadu.yahoo.com)
--[Portfolio](https://abudusamad.github.io/)
+-[Github](https://github.com/abudusamad)
 
 
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-<detail><summary> License</summary>
 
-```md
+## Code of Conduct
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-```
-
-</details>
+Please read the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details on our code of conduct.
 
 
-## Contributors
+## Security Vulnerabilities
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-<details>
-<summary>Contributors</summary>
+Please read the [SECURITY](SECURITY.md) for details on our security policy.
 
+ 

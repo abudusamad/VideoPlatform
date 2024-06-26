@@ -46,8 +46,4 @@ members of the project's leadership.
 
 ### Attribution
 
-This Code of Conduct is adapted from the [[Contributor Covenant](https://github.com/abudusamad)][homepage], version 2.1,
-available at [https://www.contributor-covenant.org/version/2/1/code_of_conduct/][version]
-
-[homepage]: http://contributor-covenant.org
-[version]: https://www.contributor-covenant.org/version/2/1
+This Code of Conduct is adapted from the [[Contributor Covenant](https://github.com/abudusamad)]

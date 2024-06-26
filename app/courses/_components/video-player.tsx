@@ -7,7 +7,6 @@ import { useState } from "react";
 
 interface VideoPlayerProps {
   playbackId: string;
-  courseId: string;
   title: string;
 }
 
