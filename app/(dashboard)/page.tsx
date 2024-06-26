@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CoursesList } from "./_components/course-list";
 import { db } from "@/lib/db";
 
+
 const HomePage = async () => {
   const courses = await db.course.findMany({
     where: {
