@@ -1,24 +1,38 @@
-import { Course, MuxData, Video } from "@prisma/client";
-import { CourseGridCard } from "./course-grid-card";
+"use client";
 
-type Props = {
-  isAdmin?: boolean;
-  courses: (Course & {
-    videos: (Video & {
-      muxData: MuxData | null;
-    })[];
-  })[];
-};
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export const CourseCard = ({ courses, isAdmin = false }: Props) => {
+interface CourseCardProps {
+  id: string;
+  title: string;
+  imageUrl: string;
+}
+
+export const CourseCard = ({
+  id,
+  title,
+  imageUrl,
+}: CourseCardProps) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
-    <>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {courses.map((course) => (
-          <CourseGridCard key={course.id} course={course} isAdmin={isAdmin} />
-        ))}
-      </div> */}
-    </>
+    <Link href={`/courses/${id}`}>
+      <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
+        <div className="relative w-full aspect-video rounded-md overflow-hidden">
+          <Image fill className="object-cover" alt="title" src={imageUrl} />
+        </div>
+        <div className="flex flex-col pt-2">
+          <div className="text-lg md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
+            {title}
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 };
-

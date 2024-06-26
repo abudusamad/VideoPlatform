@@ -1,38 +1,37 @@
 import { Container } from "@/components/container";
-import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
-import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { CardVideo } from "./_components/card-video";
-import { Course, MuxData, Video } from "@prisma/client";
-import { CourseCard } from "./_components/course-card";
+import { CoursesList } from "./_components/course-list";
+import { db } from "@/lib/db";
 
-const font = Poppins({
-  subsets: ["latin"],
-  weight: ["600"],
-});
-
-type AdminIndexPageProps = {
-  courses: (Course & {
-    videos: (Video & {
-      muxData: MuxData | null;
-    })[];
-  })[];
-};
-export default function Home({ courses }: AdminIndexPageProps) {
+const HomePage = async () => {
+  const courses = await db.course.findMany({
+    where: {
+      isPublished: true,
+    },
+  });
   return (
-    <main className="flex h-full flex-col gap-6">
-      <Heading as="h1">Draft courses are only visible to you</Heading>
-      <Link href="/admin/courses">
-        <Button variant="blue">Go to Admin</Button>
-      </Link>
+    <main className="mt-20">
       <Container>
-        <CardVideo />
-
-        <CourseCard courses={courses} isAdmin />
-
-        <Heading as="h2">No draft courses</Heading>
+        <Link href="/admin/courses">
+          <Button variant="blue">Go to Admin</Button>
+        </Link>
+        <CoursesList
+          items={courses.map((course) => ({
+            id: course.id,
+            name: course.name,
+            description: course.description,
+            imageUrl: course.imageUrl,
+            isPublished: course.isPublished,
+            slug: course.slug,
+            authorId: course.authorId,
+            createdAt: course.createdAt,
+            updatedAt: course.updatedAt,
+          }))}
+        />
       </Container>
     </main>
   );
-}
+};
+
+export default HomePage;
