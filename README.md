@@ -50,6 +50,13 @@ Filmmakers, videographers, and other creatives can showcase their work in a bran
 Allows for easy sharing and promotion of their video content.
 
 </details>
+
+ ## Database
+[Database](/public/database.png)
+
+if you want to see the database schema, you can check the [database schema](prisma) file.
+
+
 <details><summary><b>Folder Structure</b></summary>
 
 ```bash
