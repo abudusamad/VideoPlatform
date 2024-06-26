@@ -48,14 +48,12 @@ Creative Professionals
 
 Filmmakers, videographers, and other creatives can showcase their work in a branded environment, ensuring their content is presented professionally and consistently.
 Allows for easy sharing and promotion of their video content.
-
 </details>
 
  ## Database
-[Database](/public/database.png)
+![Database](/public/database.png)
 
-if you want to see the database schema, you can check the [database schema](prisma) file.
-
+If you want to see the database schema, you can check the [database schema](prisma) file.
 
 <details><summary><b>Folder Structure</b></summary>
 
@@ -156,6 +154,7 @@ app
 <details><summary>Table of Contents</summary>
 
 - [🌐 Live Demo](#-live-demo)
+- [Database](#database)
 - [📖 Table of Contents](#-table-of-contents)
 - [✨ Technologies Used](#-technologies-used)
 - [🧰 Get Started](#-get-started)
@@ -210,14 +209,14 @@ To get this project up and running in your development environment, follow these
 In order to install and run this project locally, you would need to have the following installed on your local machine.
 
 - [Node.js](https://nodejs.org/en/)
-- [NPM](https://www.npmjs.com/get-npm)https://notion-clone-jade-three.vercel.app
+- [NPM](https://www.npmjs.com/)
 - [Git](https://git-scm.com/downloads)
 
 ### ⚙️ Installation and Run Locally
 
 **Step 0:**
 
-Note: The application uses Prisma for ORM, therefore, you need to create Convex account [here](https://www.prisma.io/)  `.env` file.
+Note: The application uses Prisma for ORM, therefore, you can read documentation of prisma  [here](https://www.prisma.io/)  `.env` file.
 
 Note: The application uses AuthJs for Authentication and User Management, therefore, you need to create Auth account [here](https://www.prisma.io/) and sets the `AUTH_SECRET` environment variables in `.env` file.
 
