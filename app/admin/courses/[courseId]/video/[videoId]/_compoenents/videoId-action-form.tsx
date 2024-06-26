@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 import { toast } from "react-toastify";
+import { useConfetti } from "@/app/hooks/use-confetti";
 
 interface VideoIdActionsProps {
   disabled: boolean;
@@ -24,6 +25,7 @@ export const VideoIdActions = ({
 }: VideoIdActionsProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const cofetti = useConfetti();
 
   const onClick = async () => {
     try {
@@ -37,6 +39,7 @@ export const VideoIdActions = ({
       } else {
         await axios.patch(`/api/courses/${courseId}/video/${videoId}/publish`);
         toast.success("Video published");
+        cofetti.onOpen();
       }
 
       router.refresh();
@@ -74,7 +77,7 @@ export const VideoIdActions = ({
         {isPublished ? "Unpublish" : "Publish"}
       </Button>
       <ConfirmModal onConfirm={onDelete}>
-        <Button size="sm" disabled={isLoading}>
+        <Button variant="destructive" size="sm" disabled={isLoading}>
           <Trash className="h-4 w-4" />
         </Button>
       </ConfirmModal>
