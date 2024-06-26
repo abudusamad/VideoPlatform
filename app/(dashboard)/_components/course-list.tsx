@@ -1,9 +1,12 @@
 import { Course } from "@prisma/client";
 import { CourseCard } from "./course-card";
 
+
+    
 interface CoursesListProps {
-    items: Course[];
-    }
+  items: Course[];
+
+}
 
 export const CoursesList = ({ items }: CoursesListProps) => {
   return (
@@ -13,7 +16,7 @@ export const CoursesList = ({ items }: CoursesListProps) => {
           <CourseCard
             key={item.id}
             id={item.id}
-            title={item.name}
+            name={item.name}
             imageUrl={item.imageUrl!}
           />
         ))}
