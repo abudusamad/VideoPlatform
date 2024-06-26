@@ -48,7 +48,7 @@ export const ActionForm = ({
       await axios.delete(`/api/courses/${courseId}`);
       toast.success("Chapter deleted");
       router.refresh();
-      router.push(`/teacher/courses`);
+      router.push(`/admin/courses`);
     } catch {
       toast.error("Something went wrong");
     } finally {

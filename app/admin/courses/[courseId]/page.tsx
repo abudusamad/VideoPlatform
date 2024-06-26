@@ -8,6 +8,7 @@ import { Video } from "lucide-react";
 import { VideoForm } from "./_components/video-form";
 import { ImageForm } from "./_components/image-form";
 import { ActionForm } from "./_components/action";
+import { Banner } from "@/components/banner";
 
 const CourseIdPage = async ({
   params,
@@ -42,6 +43,9 @@ const CourseIdPage = async ({
 
   return (
     <Container>
+      {!course.isPublished && (
+        <Banner label="This course is unpublished. It will not be visible to the students." />
+      )}
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
