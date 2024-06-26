@@ -19,11 +19,14 @@ export async function POST(req: Request) {
 
         const course = await db.course.create({
             data: {
-                id: currentUser.id,
                 name,
                 description,
                 slug: slugify(name),
-                authorId: currentUser.id
+                author: {
+                    connect: {
+                        id: currentUser.id,
+                    },
+                },
                 
             }           
         });

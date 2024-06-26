@@ -93,15 +93,9 @@ export async function POST(
 		const video = await db.video.create({
 			
 			data: {
-				id:currentUser.id,
 				title,
 				description,
 				slug: slugify(title),
-				uploader: {
-					connect: {
-						id: currentUser.id,
-					},
-				},
 				course: {
 					connect: {
 						id: params.courseId,

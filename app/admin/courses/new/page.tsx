@@ -38,8 +38,10 @@ const AdminNewPage = () => {
   const { isSubmitting, isValid } = form.formState;
   const onSubmit = async (values: z.infer<typeof CreateVideoSchema>) => {
     try {
-      const response = await axios.post("/api/courses", values);
+      const response = await axios.post("/api/courses/create", values);
       router.push(`/admin/courses/${response.data.id}`);
+      console.log(response.data.id)
+      console.log(values)
       toast.success("Course created");
     } catch {
       toast.error("Something went wrong");

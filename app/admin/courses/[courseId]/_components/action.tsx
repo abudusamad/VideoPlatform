@@ -9,12 +9,38 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 interface ActionFormProps {
+  disabled: boolean;
   courseId: string;
+  isPublished: boolean;
 }
 
-export const ActionForm = ({ courseId }: ActionFormProps) => {
+export const ActionForm = ({
+  disabled,
+  courseId,
+  isPublished,
+}: ActionFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+
+  const onClick = async () => {
+    try {
+      setIsLoading(true);
+      if (isPublished) {
+        await axios.patch(`/api/courses/${courseId}/unpublish`);
+        toast.success("Course unpublished");
+      } else {
+        await axios.patch(`/api/courses/${courseId}/publish`);
+        toast.success("Course published");
+
+      }
+      router.refresh();
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onDelete = async () => {
     try {
@@ -22,7 +48,7 @@ export const ActionForm = ({ courseId }: ActionFormProps) => {
       await axios.delete(`/api/courses/${courseId}`);
       toast.success("Chapter deleted");
       router.refresh();
-      router.push(`/admin/courses/new`);
+      router.push(`/teacher/courses`);
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -31,6 +57,9 @@ export const ActionForm = ({ courseId }: ActionFormProps) => {
   };
   return (
     <div className="flex items-center gap-x-2">
+      <Button onClick={onClick} disabled={disabled} variant="outline" size="sm">
+        {isPublished ? "Unpublish" : "Publish"}
+      </Button>
       <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>
           <Trash className="h-4 w-4" />

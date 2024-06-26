@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export function CardVideo() {
+export function CardVideo   () {
   return (
     <Carousel className="w-full max-w-xs">
       <CarouselContent>
