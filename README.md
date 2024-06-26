@@ -1,4 +1,4 @@
-# BrandVid[logo](/public/logo.svg)
+<h1 align="center">BrandVid</h1>
 
 ![demo](/public/image/Screenshot%20from%202024-05-29%2021-50-41.png)
 
@@ -8,82 +8,139 @@
 
 Explore the live demonstration of the project: [BrandVid](https://video-platform-sable.vercel.app/)
 
-## 📝 Description
+<details><summary><b>Description</b></summary>
 
 **BrandVid** BrandVid is all about providing a bespoke video hosting platform that emphasizes brand consistency, content control, and a professional user experience. It caters to businesses, educators, and creative professionals who need a reliable and customizable 
 solution for hosting and sharing their video content.
 
+Key Features and Descriptions
+User Authentication
+
+Signup & Login: Users can create accounts and log in using their email and password, ensuring secure access to the platform.
+Account Verification: New users receive an email to verify their account, adding an extra layer of security and confirming the user's identity.
+Password Reset: Users have the option to reset their passwords in case they forget them, ensuring they can always regain access to their accounts.
+Video Navigation
+
+Video Pages: Users can easily browse and navigate through different video pages, each dedicated to a single video.
+Next/Previous Buttons: Navigate between videos using next and previous buttons. These buttons will be hidden if there are no more videos in that direction, providing a smooth user experience.
+Share Links: Users can share links to specific videos, allowing for easy dissemination of content across different platforms and media.
+Admin Controls
+
+Video Upload: Admins can upload videos, providing a title and description for each. This feature ensures that videos are properly categorized and described.
+Video Management: Admins can manage the uploaded videos, including editing titles, descriptions, and other metadata to keep the content up-to-date and relevant.
+Video Page Features
+
+Single Video Display: Each video page is dedicated to one video, ensuring a focused and distraction-free viewing experience.
+Navigation Controls: Next and previous buttons enable seamless navigation through the video library. These buttons are hidden if there are no more videos to navigate to.
+Video Controls: Common video controls (play, pause, volume adjustment, etc.) are available, giving users full control over their viewing experience.
+Branding: A prominently displayed business logo at the top of the video page reinforces brand identity and professionalism.
+Share Button: A share button allows users to share the link to the current video page easily, promoting the content and brand.
+Use Cases
+Business Branding
+
+Companies can use BrandVid to host promotional videos, product demos, tutorials, and other content that aligns with their brand identity.
+Ensures all videos are consistently branded, providing a professional and cohesive look.
+Educational Content
+
+Educators and institutions can use BrandVid to upload and manage lecture videos, tutorials, and other educational content.
+Provides a controlled environment for students and learners to access educational materials.
+Creative Professionals
+
+Filmmakers, videographers, and other creatives can showcase their work in a branded environment, ensuring their content is presented professionally and consistently.
+Allows for easy sharing and promotion of their video content.
+
+</details>
 <details><summary><b>Folder Structure</b></summary>
 
 ```bash
-hotel-and-homestel-accommodation/
 app
-├── api
-│   └── auth
-│       └── [...nextauth]
-│           └── route.ts
-├── (auth)
-│   └── auth
-│       ├── confirm
-│       │   └── page.tsx
-│       ├── error
-│       │   └── page.tsx
-│       ├── layout.tsx
-│       ├── login
-│       │   └── page.tsx
-│       ├── new-password
-│       │   └── page.tsx
-│       ├── register
-│       │   └── page.tsx
-│       └── reset
-│           └── page.tsx
-├── (dashboard)
-│   ├── dashboard
+├── admin
+│   ├── courses
+│   │   ├── _components
+│   │   │   ├── columns.tsx
+│   │   │   └── data-table.tsx
+│   │   ├── [courseId]
+│   │   │   ├── _components
+│   │   │   │   ├── action.tsx
+│   │   │   │   ├── course-update.tsx
+│   │   │   │   ├── image-form.tsx
+│   │   │   │   └── video-form.tsx
+│   │   │   ├── page.tsx
+│   │   │   └── video
+│   │   │       ├── _components
+│   │   │       └── [videoId]
+│   │   │           ├── _compoenents
+│   │   │           │   ├── videoId-action-form.tsx
+│   │   │           │   └── videoId-form.tsx
+│   │   │           └── page.tsx
+│   │   ├── new
+│   │   │   └── page.tsx
 │   │   └── page.tsx
 │   └── layout.tsx
+├── api
+│   ├── auth
+│   │   └── [...nextauth]
+│   │       └── route.ts
+│   ├── courses
+│   │   ├── [courseId]
+│   │   │   ├── publish
+│   │   │   │   └── route.ts
+│   │   │   ├── route.ts
+│   │   │   ├── unpublish
+│   │   │   │   └── route.ts
+│   │   │   └── video
+│   │   │       ├── route.ts
+│   │   │       └── [videoId]
+│   │   │           ├── publish
+│   │   │           │   └── route.ts
+│   │   │           ├── route.ts
+│   │   │           └── unpublish
+│   │   │               └── route.ts
+│   │   └── create
+│   │       └── route.ts
+│   └── uploadthing
+│       ├── core.ts
+│       └── route.ts
+├── auth
+│   ├── confirm
+│   │   └── page.tsx
+│   ├── error
+│   │   └── page.tsx
+│   ├── layout.tsx
+│   ├── login
+│   │   └── page.tsx
+│   ├── new-password
+│   │   └── page.tsx
+│   ├── register
+│   │   └── page.tsx
+│   └── reset
+│       └── page.tsx
+├── courses
+│   ├── _components
+│   │   └── video-player.tsx
+│   └── [courseId]
+│       └── page.tsx
+├── (dashboard)
+│   ├── _components
+│   │   ├── avatarImage.tsx
+│   │   ├── course-card.tsx
+│   │   ├── course-list.tsx
+│   │   ├── logo.tsx
+│   │   ├── navbar.tsx
+│   │   └── usermenu.tsx
+│   ├── layout.tsx
+│   └── page.tsx
 ├── globals.css
+├── hooks
+│   ├── use-confetti.ts
+│   └── use-debounce.ts
 ├── layout.tsx
-└── (marketing)
-    ├── layout.tsx
-    └── (routes)
-        ├── _components
-        │   ├── homePage
-        │   │   ├── _components
-        │   │   │   ├── cardsCarousel.tsx
-        │   │   │   ├── communityCard.tsx
-        │   │   │   ├── homepageavatardot.tsx
-        │   │   │   └── homepageavatar.tsx
-        │   │   ├── connect.tsx
-        │   │   ├── hero.tsx
-        │   │   ├── Interconection
-        │   │   │   ├── constant.ts
-        │   │   │   └── intersection.tsx
-        │   │   ├── sayhello.tsx
-        │   │   └── SoloToSocial
-        │   │       ├── constant.ts
-        │   │       └── solotosocial.tsx
-        │   ├── navbar
-        │   │   ├── avatarImage.tsx
-        │   │   ├── logo.tsx
-        │   │   ├── Navbar.tsx
-        │   │   ├── search.tsx
-        │   │   └── usermenu.tsx
-        │   └── style
-        │       ├── community.css
-        │       ├── community.css.map
-        │       ├── community.scss
-        │       ├── connect.css
-        │       ├── connect.css.map
-        │       ├── connect.scss
-        │       ├── intersection.css
-        │       ├── intersection.css.map
-        │       ├── intersection.scss
-        │       ├── sayhello.css
-        │       ├── sayhello.css.map
-        │       └── sayhello.scss
-        └── page.tsx
-
-
+├── providers
+│   ├── confetti-provider.tsx
+│   ├── provider.tsx
+│   └── toast-provider.tsx
+└── settings
+    └── page.tsx
 ```
 </details>
 
@@ -91,27 +148,25 @@ app
 
 <details><summary>Table of Contents</summary>
 
-- [BrandVid](#brandvidlogo)
-  - [🌐 Live Demo](#-live-demo)
-  - [📝 Description](#-description)
-  - [📖 Table of Contents](#-table-of-contents)
-  - [✨ Technologies Used](#-technologies-used)
-  - [🧰 Get Started](#-get-started)
-    - [📋 Prerequisites](#-prerequisites)
-    - [⚙️ Installation and Run Locally](#️-installation-and-run-locally)
-    - [📜 Scripts](#-scripts)
-  - [🔒 Environment Variables](#-environment-variables)
-  - [🚀 Deployment](#-deployment)
-      - [Deploy to production (manual)](#deploy-to-production-manual)
-      - [Deploy on Vercel (recommended)](#deploy-on-vercel-recommended)
-      - [Deploy on Netlify](#deploy-on-netlify)
-  - [💡 Features](#-features)
-  - [🔧 Contributing](#-contributing)
-  - [💎 Acknowledgements](#-acknowledgements)
-  - [📚 References](#-references)
-  - [📞 Contact Us](#-contact-us)
-  - [📜 License](#-license)
-  - [Contributors](#contributors)
+- [🌐 Live Demo](#-live-demo)
+- [📖 Table of Contents](#-table-of-contents)
+- [✨ Technologies Used](#-technologies-used)
+- [🧰 Get Started](#-get-started)
+  - [📋 Prerequisites](#-prerequisites)
+  - [⚙️ Installation and Run Locally](#️-installation-and-run-locally)
+  - [📜 Scripts](#-scripts)
+- [🔒 Environment Variables](#-environment-variables)
+- [🚀 Deployment](#-deployment)
+    - [Deploy to production (manual)](#deploy-to-production-manual)
+    - [Deploy on Vercel (recommended)](#deploy-on-vercel-recommended)
+    - [Deploy on Netlify](#deploy-on-netlify)
+- [💡 Features](#-features)
+- [💎 Acknowledgements](#-acknowledgements)
+- [📚 References](#-references)
+- [📞 Contact Us](#-contact-us)
+- [📜 License](#-license)
+- [Code of Conduct](#code-of-conduct)
+- [Security Vulnerabilities](#security-vulnerabilities)
 
 </details>
 
