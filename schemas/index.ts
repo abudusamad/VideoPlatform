@@ -1,4 +1,5 @@
 
+import { UserRole } from "@prisma/client";
 import * as z from "zod";
 
 
@@ -54,3 +55,9 @@ export const VideoSchema  = z.object({
       message: "Description must be  at least 6 characters"
     })
 });
+
+export const SettingsSchema = z.object({
+
+  role: z.enum([UserRole.ADMIN, UserRole.USER]),
+});
+ 
