@@ -4,11 +4,12 @@ import { Video } from "@prisma/client";
 interface GetChapterProps {
 	courseId: string;
 	videoId: string;
+	
 }
 
 export const getVideo = async ({
     courseId,
-    videoId
+	videoId,
 }: GetChapterProps) => {
 	try {
 		

@@ -7,12 +7,16 @@ import { useState } from "react";
 
 interface VideoPlayerProps {
   playbackId: string;
-  title: string;
+  title?: string;
+  videoId: string
+  courseId: string
 }
 
 export const VideoPlayer = ({
   playbackId,
   title,
+  videoId,
+  courseId,
 }: VideoPlayerProps) => {
   const [isReady, setIsReady] = useState(false);
   return (

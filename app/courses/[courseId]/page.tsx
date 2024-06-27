@@ -1,30 +1,29 @@
-import { getVideo } from "@/actions/get-videos";
-import { VideoPlayer } from "../_components/video-player";
+import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
 
-const CourseIdPage = async ({
-  params,
-}: {
-  params: {
-    courseId: string;
-    videoId: string;
-  };
-}) => {
-  const { video, muxData } = await getVideo({
-    courseId: params.courseId,
-    videoId: params.videoId,
+const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
+  const course = await db.course.findUnique({
+    where: {
+      id: params.courseId,
+    },
+    include: {
+      video: {
+        where: {
+          isPublished: true,
+        },
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+    },
   });
 
-  if (!video || !muxData) {
-    return <div>Video not found</div>;
+
+  if (!course) {
+    return redirect("/");
   }
 
-  return (
-    <div className="flex flex-col max-w-4xl mx-auto pb-20">
-      <div className="p-4">
-        <VideoPlayer title={video?.title!} playbackId={muxData?.playbackId!} />
-      </div>
-    </div>
-  );
+  return redirect(`/courses/${course.id}/videos/${course.video[0].id}`);
 };
 
 export default CourseIdPage;
