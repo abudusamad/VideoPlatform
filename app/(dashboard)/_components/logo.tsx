@@ -17,13 +17,13 @@ export const Logo = () => {
       onClick={() => router.push("/")}
     >
       <Image
-        width={60}
-        height={60}
+        width={40}
+        height={40}
         alt="Logo"
         src="/logo.svg"
         className={cn("font-semibold ", font.className)}
       />
-      BrandVid
+      <span className="hidden md:block">BrandVid</span>
     </div>
   );
 };
