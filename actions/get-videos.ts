@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { Video } from "@prisma/client";
 
-interface GetChapterProps {
+interface GetVideoProps {
 	courseId: string;
 	videoId: string;
 	
@@ -10,7 +10,7 @@ interface GetChapterProps {
 export const getVideo = async ({
     courseId,
 	videoId,
-}: GetChapterProps) => {
+}: GetVideoProps) => {
 	try {
 		
 		const course = await db.course.findUnique({
@@ -49,7 +49,7 @@ export const getVideo = async ({
         };
             
 	} catch (error) {
-		console.log("[GET_CHAPTER]", error);
+		console.log("[VIDEO]", error);
 		return {
 			video: null,
 			course: null,
