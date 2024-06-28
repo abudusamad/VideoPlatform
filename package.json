@@ -15,7 +15,7 @@
     "@mux/mux-node": "^8.8.0",
     "@mux/mux-player-react": "^2.7.0",
     "@mux/mux-uploader-react": "^1.0.0-beta.18",
-    "@prisma/client": "^5.16.0",
+    "@prisma/client": "^5.16.1",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-checkbox": "^1.1.0",

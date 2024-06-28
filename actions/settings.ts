@@ -7,7 +7,6 @@ import { SettingsSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
 ;
 import getCurrentUser from "./get-current-user";
-import { unstable_update } from "@/auth";
 import { currentUser } from "@/lib/auth";
 
 export const settings = async (
@@ -33,12 +32,6 @@ export const settings = async (
     where: { id: dbUser.id },
     data: {
       ...values,
-    }
-  });
-
-  unstable_update({
-    user: {
-      role: updatedUser.role,
     }
   });
 

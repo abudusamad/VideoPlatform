@@ -1,4 +1,5 @@
 <h1 align="center">BrandVid</h1>
+<h3 align="center">I will be glad if you will involve me in the review process </h3>
 
 ![demo](/public/image/Screenshot%20from%202024-05-29%2021-50-41.png)
 

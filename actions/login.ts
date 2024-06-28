@@ -44,7 +44,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?:st
 		await signIn("credentials", {
 			email,
 			password,
-			redirectTo: DEFAULT_LOGIN_REDIRECT,
+			redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
 		
 		});
 		
@@ -54,7 +54,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?:st
 				case "CredentialsSignin":
 					return { error: "Invalid credentials" };
 				default:
-					return {error: "Something went wrong!"}
+					return {error: "Invalid credentials!"}
 			}
 		}
 		throw error;
