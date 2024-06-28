@@ -9,7 +9,9 @@
 export const publicRoutes = [
   "/",
   "/auth/confirm",
-  "/api/uploadthing"
+  "/api/uploadthing",
+  "/auth/new-password",
+
 ];
 
 /**
@@ -22,7 +24,6 @@ export const authRoutes = [
   "/auth/register",
   "/auth/error",
   "/auth/reset",
-  "/auth/new-password"
 ];
 
 /**

@@ -1,8 +1,9 @@
 <h1 align="center">BrandVid</h1>
 <h3 align="center">I will be glad if you will involve me in the review process </h3>
 
-![demo](/public/image/Screenshot%20from%202024-05-29%2021-50-41.png)
+[ForgotPassword demo](/public/password.mp4)
 
+[Add Video Demo](/public/addVideo.mp4)
 
 
 ## 🌐 Live Demo
@@ -11,7 +12,7 @@ Explore the live demonstration of the project: [BrandVid](https://video-platform
 
 <details><summary><b>Description</b></summary>
 
-**BrandVid** BrandVid is all about providing a bespoke video hosting platform that emphasizes brand consistency, content control, and a professional user experience. It caters to businesses, educators, and creative professionals who need a reliable and customizable 
+**BrandVid** is all about providing a bespoke video hosting platform that emphasizes brand consistency, content control, and a professional user experience. It caters to businesses, educators, and creative professionals who need a reliable and customizable 
 solution for hosting and sharing their video content.
 
 Key Features and Descriptions

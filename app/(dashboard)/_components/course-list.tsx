@@ -1,11 +1,8 @@
 import { Course } from "@prisma/client";
 import { CourseCard } from "./course-card";
 
-
-    
 interface CoursesListProps {
   items: Course[];
-
 }
 
 export const CoursesList = ({ items }: CoursesListProps) => {
