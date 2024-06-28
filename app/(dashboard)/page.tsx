@@ -1,15 +1,16 @@
+
+
 import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CoursesList } from "./_components/course-list";
-import { db } from "@/lib/db";
 import { getCourses } from "@/actions/get-courses";
 
-const HomePage = async () => {
-  const courses = await getCourses({
-    name: "",
-  
- })
+
+const HomePage =  async() => {
+  const course = await getCourses({
+  name: ""
+})
 
   return (
     <main className="mt-20">
@@ -17,7 +18,7 @@ const HomePage = async () => {
         <Link href="/admin/courses">
           <Button variant="blue">Go to Admin</Button>
         </Link>
-        <CoursesList items={courses} />
+        <CoursesList items={course} />
       </Container>
     </main>
   );
