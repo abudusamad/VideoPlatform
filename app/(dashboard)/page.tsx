@@ -3,27 +3,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CoursesList } from "./_components/course-list";
 import { db } from "@/lib/db";
+import { getCourses } from "@/actions/get-courses";
 
 const HomePage = async () => {
-  const courses = await db.course.findMany({
-    where: {
-      isPublished: true,
-    },
-    include: {
-      video: {
-        where: {
-          isPublished: true,
-        },
-        select: {
-          id: true,
-        },
-      },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
+  const courses = await getCourses({
+    name: "",
+  
+ })
 
   return (
     <main className="mt-20">

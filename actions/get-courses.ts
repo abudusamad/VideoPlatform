@@ -8,20 +8,18 @@ type CourseProps = Course & {
 };
 
 type GetCourses = {
-	currentUser: string;
-	title?: string;
+	name?: string;
 };
 
 export const getCourses = async ({
-	currentUser,
-	title,
+	name,
 }: GetCourses): Promise<CourseProps[]> => {
 	try {
 		const courses = await db.course.findMany({
 			where: {
 				isPublished: true,
 				name: {
-					contains: title,
+					contains: name,
 				},
 			},
 			include: {
