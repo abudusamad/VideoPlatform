@@ -1,6 +1,8 @@
 <h1 align="center">BrandVid</h1>
 <h3 align="center">I will be glad if you will involve me in the review process </h3>
 
+![demo](/public/homepage.png)
+
 [ForgotPassword demo](/public/password.mp4)
 
 [Add Video Demo](/public/addVideo.mp4)
