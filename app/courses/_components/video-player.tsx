@@ -27,6 +27,8 @@ export const VideoPlayer = ({
         onCanPlay={() => setIsReady(true)}
         autoPlay
         playbackId={playbackId}
+        streamType="on-demand"
+        muted
       />
     </div>
   );

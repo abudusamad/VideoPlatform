@@ -50,7 +50,7 @@ const VideoIdPage = async ({
       {!video.isPublished && (
         <Banner
           variant="warning"
-          label="This chapter is unpublished. It will not be visible in the course"
+          label="This video is unpublished. It will not be visible in the course"
         />
       )}
       <div className="p-6">

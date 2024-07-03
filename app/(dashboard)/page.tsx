@@ -11,16 +11,16 @@ import { currentRole } from "@/lib/auth";
 
 const HomePage = async () => {
   const course = await getCourses({});
-  const role = await currentRole();
+  const currentUserRole = await currentRole();
 
   return (
     <main className="mt-20">
       <Container>
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-4 ">
           <RoleGate allowedRole={UserRole.ADMIN}>
             <FormSuccessDb message="You have permission  Add Course!" />
           </RoleGate>
-          {role === UserRole.ADMIN && (
+          {currentUserRole === UserRole.ADMIN && (
             <Link href="/admin/courses">
               <Button variant="blue">Go to Admin</Button>
             </Link>

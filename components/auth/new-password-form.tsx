@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { newPassword } from "@/actions/new-password";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -29,6 +30,7 @@ export const NewPasswordForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<z.infer<typeof NewPasswordSchema>>({
     resolver: zodResolver(NewPasswordSchema),
@@ -65,13 +67,29 @@ export const NewPasswordForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="********"
+                        type={showPassword ? "text" : "password"}
+                      />
+                      <Button
+                        className="absolute inset-y-0 right-2 flex items-center"
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => setShowPassword(!showPassword)}
+                        type="button"
+                      >
+                        {showPassword ? (
+                          <EyeOffIcon className="w-5 h-5" />
+                        ) : (
+                          <EyeIcon className="w-5 h-5" />
+                        )}
+                      </Button>
+                    </div>
                   </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}

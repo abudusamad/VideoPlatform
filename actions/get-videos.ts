@@ -2,58 +2,36 @@ import { db } from "@/lib/db";
 import { Video } from "@prisma/client";
 
 interface GetVideoProps {
-	courseId: string;
-	videoId: string;
-	
+    courseId: string;
+    videoId: string;
 }
 
 export const getVideo = async ({
     courseId,
-	videoId,
+    videoId,
 }: GetVideoProps) => {
-	try {
-		
-		const course = await db.course.findUnique({
-			where: {
-				isPublished: true,
-				id: courseId,
-			},
-		
-		});
+    try {
+    
+        const [course, video] = await Promise.all([
+            db.course.findUnique({
+                where: { id: courseId, isPublished: true },
+            }),
+            db.video.findUnique({
+                where: { id: videoId, isPublished: true },
+            }),
+        ]);
 
-		const video = await db.video.findUnique({
-            where: {
-            id: videoId,
-			isPublished: true,
-			},
-		});
-
-		if ( !course) {
-			throw new Error("Video or course not found");
-        }
-        
-        let muxData = null;
-        if (video) {
-            muxData = await db.muxData.findUnique({
-                where: {
-                    videoId: videoId,
-                },
-            });
-        }
+        if (!course) throw new Error("Course not found");
+        if (!video) throw new Error("Video not found");
 
 
-		return {
-			video,
-			course,
-			muxData
-        };
-            
-	} catch (error) {
-		console.log("[VIDEO]", error);
-		return {
-			video: null,
-			course: null,
-			muxData: null,
-		};
-	}
+        let muxData = video ? await db.muxData.findUnique({
+            where: { videoId: videoId },
+        }) : null;
+
+        return { video, course, muxData };
+    } catch (error) {
+        console.log("[VIDEO]", error);
+        return { video: null, course: null, muxData: null };
+    }
 };
