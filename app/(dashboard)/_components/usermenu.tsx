@@ -12,7 +12,7 @@ import { MenuIcon } from "lucide-react";
 import { AvatarImg } from "./avatarImage";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, UserRole } from "@prisma/client";
+import { UserRole } from "@prisma/client";
 import { SettingsSchema } from "@/schemas";
 import {
   Form,
@@ -29,37 +29,44 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import { settings } from "@/actions/settings";
+import { useCurrentUser } from "@/app/hooks/use-current-user";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
-interface UserMenuProps {
-  user?: User;
-}
+export const UserMenu = () => {
+  const user = useCurrentUser();
 
-export const UserMenu = ({ user }: UserMenuProps) => {
   const { data: session } = useSession();
-    const [isPending] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
-  const router = useRouter();
+  const [error, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<string | undefined>();
+  const { update } = useSession();
 
   const form = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
-      role: user?.role || undefined,
+      role: user?.role,
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof SettingsSchema>) => {
-    console.log(values);
-    try {
-      await axios.patch("api/settings", values);
-      toast.success("Role updated");
-      router.refresh();
-    } catch {
-      toast.error("Something went wrong");
-    }
+  const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
+    startTransition(() => {
+      settings(values)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+          }
+
+          if (data.success) {
+            update();
+            setSuccess(data.success);
+          }
+        })
+        .catch(() => setError("Something went wrong!"));
+    });
   };
 
   return (
@@ -90,7 +97,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
           </PopoverTrigger>
           <PopoverContent>
             <div className="flex flex-col gap-6">
-              {/* <Form {...form}>
+              <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <FormField
                     control={form.control}
@@ -119,8 +126,13 @@ export const UserMenu = ({ user }: UserMenuProps) => {
                       </FormItem>
                     )}
                   />
+                  <FormError message={error} />
+                  <FormSuccess message={success} />
+                  <Button variant="blue" disabled={isPending} type="submit" className="mt-2">
+                    Save
+                  </Button>
                 </form>
-              </Form> */}
+              </Form>
               <Button
                 variant="outline"
                 size="sm"

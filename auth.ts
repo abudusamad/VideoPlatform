@@ -66,9 +66,7 @@ export const {
         existingUser.id
       );
 
-      token.isOAuth = !!existingAccount;
-      token.name = existingUser.name;
-      token.email = existingUser.email;
+
       token.role = existingUser.role;
 
 			return token;

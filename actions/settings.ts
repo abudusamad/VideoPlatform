@@ -4,7 +4,7 @@ import * as z from "zod";
 
 import { db } from "@/lib/db";
 import { SettingsSchema } from "@/schemas";
-import { getUserByEmail, getUserById } from "@/data/user";
+import {  getUserById } from "@/data/user";
 ;
 import getCurrentUser from "./get-current-user";
 import { currentUser } from "@/lib/auth";
@@ -28,12 +28,12 @@ export const settings = async (
   }
 
   
-  const updatedUser = await db.user.update({
+ await db.user.update({
     where: { id: dbUser.id },
     data: {
       ...values,
     }
   });
 
-  return { success: "Settings Updated!" }
+  return { success: "Role Updated!" }
 }
