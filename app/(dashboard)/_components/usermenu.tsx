@@ -98,7 +98,7 @@ export const UserMenu = () => {
               <AvatarImg src={session?.user?.image} alt="user" />
             </div>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent sideOffset={23} align="end">
             <div className="flex flex-col gap-6">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>

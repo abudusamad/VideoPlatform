@@ -11,7 +11,7 @@ import { ModeToggle } from "@/components/theme-toggle-mode";
 export const Navbar = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const pathname = usePathname();
+
 
   return (
     <div className="z-50 bg-background fixed top-0 flex items-center justify-between w-full p-2 border-b-[1px] shadow-sm px-8 gap-4">
