@@ -22,17 +22,17 @@ const HomePage = async ({ searchParams }: { searchParams: searchParams }) => {
   return (
     <main className="mt-20">
       <Container>
-        <div className="flex flex-col gap-4 ">
-          <RoleGate allowedRole={UserRole.ADMIN}>
-            <FormSuccessDb message="You have permission  Add Course!" />
-          </RoleGate>
-          {currentUserRole === UserRole.ADMIN && (
-            <Link href="/admin/courses">
-              <Button variant="blue">Go to Admin</Button>
-            </Link>
-          )}
-        </div>
         <Suspense>
+          <div className="flex flex-col gap-4 ">
+            <RoleGate allowedRole={UserRole.ADMIN}>
+              <FormSuccessDb message="You have permission  Add Course!" />
+            </RoleGate>
+            {currentUserRole === UserRole.ADMIN && (
+              <Link href="/admin/courses">
+                <Button variant="blue">Go to Admin</Button>
+              </Link>
+            )}
+          </div>
           <CoursesList items={course} />
         </Suspense>
       </Container>
