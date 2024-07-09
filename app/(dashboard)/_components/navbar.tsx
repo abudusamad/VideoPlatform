@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { Logo } from "./logo";
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "@/components/search-input";
+import { ModeToggle } from "@/components/theme-toggle-mode";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="z-50 bg-background fixed top-0 flex items-center justify-between w-full p-2 border-b-[1px] shadow-sm px-8">
+    <div className="z-50 bg-background fixed top-0 flex items-center justify-between w-full p-2 border-b-[1px] shadow-sm px-8 gap-4">
       <div className="flex-grow-0">
         <Logo />
       </div>
@@ -41,6 +42,7 @@ export const Navbar = () => {
           <UserMenu />
         )}
       </div>
+      <ModeToggle/>
     </div>
   );
 };

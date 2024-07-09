@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/lib/constant";
 import { Provider } from "./providers/provider";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "./providers/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,8 +31,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider />
-        <SessionProvider>{children}</SessionProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+          themes={["light", "dark"]}
+        
+        >
+          <Provider />
+          <SessionProvider>{children}</SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
