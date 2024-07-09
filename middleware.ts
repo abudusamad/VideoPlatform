@@ -7,7 +7,6 @@ import {
 	authRoutes,
 	publicRoutes,
 } from "@/routes";
-import { NextRequest } from "next/server";
 
 const { auth } = NextAuth(authConfig);
 

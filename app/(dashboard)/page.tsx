@@ -2,15 +2,17 @@ import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CoursesList } from "./_components/course-list";
-import { getCourses } from "@/actions/get-courses";
 import { RoleGate } from "@/components/role-gate";
 import { UserRole } from "@prisma/client";
 
 import { FormSuccessDb } from "@/components/form-sucess-db";
 import { currentRole } from "@/lib/auth";
+import { getCourses } from "@/actions/get-courses";
+
 
 const HomePage = async () => {
   const course = await getCourses({});
+
   const currentUserRole = await currentRole();
 
   return (
