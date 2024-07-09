@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/constant";
 import { Provider } from "./providers/provider";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "./providers/theme-provider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,16 +32,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
-          themes={["light", "dark"]}
-        
-        >
-          <Provider />
-          <SessionProvider>{children}</SessionProvider>
-        </ThemeProvider>
+        <Suspense>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem={true}
+            themes={["light", "dark"]}
+          >
+            <Provider />
+            <SessionProvider>{children}</SessionProvider>
+          </ThemeProvider>
+        </Suspense>
       </body>
     </html>
   );
