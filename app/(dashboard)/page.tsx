@@ -10,13 +10,9 @@ import { currentRole } from "@/lib/auth";
 import { getCourses } from "@/actions/get-courses";
 import { Suspense } from "react";
 
-interface searchParams {
-  name: string;
-}
 
-const HomePage = async ({ searchParams }: { searchParams: searchParams }) => {
-  const course = await getCourses(searchParams);
-
+const HomePage = async () => {
+  const course = await getCourses({});
   const currentUserRole = await currentRole();
 
   return (
