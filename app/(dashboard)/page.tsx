@@ -8,6 +8,7 @@ import { UserRole } from "@prisma/client";
 import { FormSuccessDb } from "@/components/form-sucess-db";
 import { currentRole } from "@/lib/auth";
 import { getCourses } from "@/actions/get-courses";
+import { Suspense } from "react";
 
 interface searchParams {
   name: string;
@@ -31,7 +32,9 @@ const HomePage = async ({ searchParams }: { searchParams: searchParams }) => {
             </Link>
           )}
         </div>
-        <CoursesList items={course} />
+        <Suspense>
+          <CoursesList items={course} />
+        </Suspense>
       </Container>
     </main>
   );
