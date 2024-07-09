@@ -34,9 +34,11 @@ import { settings } from "@/actions/settings";
 import { useCurrentUser } from "@/app/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { useRouter } from "next/navigation";
 
 export const UserMenu = () => {
   const user = useCurrentUser();
+  const router = useRouter();
 
   const { data: session } = useSession();
   const [isPending, startTransition] = useTransition();
@@ -62,6 +64,7 @@ export const UserMenu = () => {
 
           if (data.success) {
             update();
+            router.refresh();
             setSuccess(data.success);
           }
         })
