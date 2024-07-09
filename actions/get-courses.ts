@@ -20,6 +20,7 @@ export const getCourses = async ({
 				isPublished: true,
 				name: {
 					contains: name,
+					mode:"insensitive",
 				},
 			},
 			include: {

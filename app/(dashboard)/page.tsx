@@ -9,9 +9,12 @@ import { FormSuccessDb } from "@/components/form-sucess-db";
 import { currentRole } from "@/lib/auth";
 import { getCourses } from "@/actions/get-courses";
 
+interface searchParams {
+  name: string;
+}
 
-const HomePage = async () => {
-  const course = await getCourses({});
+const HomePage = async ({ searchParams }: { searchParams: searchParams }) => {
+  const course = await getCourses(searchParams);
 
   const currentUserRole = await currentRole();
 
